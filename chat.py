@@ -115,7 +115,12 @@ else:
         st.session_state.message_list.append({"role": "user", "content": user_question})
 
         with st.spinner("🔍 답변 생성 중..."):
-            ai_response = get_ai_response(user_question, stream=True)
+            ai_response = get_ai_response(
+                user_question,
+                api_key=st.secrets["OPENAI_API_KEY"],
+                pinecone_key=st.secrets["PINECONE_API_KEY"],
+                stream=True
+            )
             full_text = ""
             with st.chat_message("ai"):
                 response_placeholder = st.empty()
