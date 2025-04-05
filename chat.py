@@ -1,5 +1,6 @@
 import streamlit as st
 import traceback
+import openai
 
 # 🔽 아래 모듈들은 당신이 미리 구현한 걸 가져와 사용합니다
 from llm import get_ai_response
@@ -15,6 +16,8 @@ st.caption("식단 최적화와 라이프스타일 코칭을 한 번에!")
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
+
+print("✅ openai version:", openai.__version__)
 
 # 세션 상태 초기화
 if 'message_list' not in st.session_state:
