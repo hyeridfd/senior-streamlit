@@ -45,3 +45,4 @@ typing_extensions==4.8.0
 uvicorn==0.29.0
 wrapt==1.14.1
 xlrd==2.0.1
+streamlit==1.33.0
