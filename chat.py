@@ -1,5 +1,4 @@
 import streamlit as st
-#from dotenv import load_dotenv
 import traceback
 
 # 🔽 아래 모듈들은 당신이 미리 구현한 걸 가져와 사용합니다
@@ -13,8 +12,6 @@ from pymoo_runner import run_optimization_from_streamlit
 st.set_page_config(page_title="고령자 건강 챗봇", page_icon="🧓")
 st.title("고령자 라이프스타일 코칭 챗봇")
 st.caption("식단 최적화와 라이프스타일 코칭을 한 번에!")
-
-#load_dotenv()
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
