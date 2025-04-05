@@ -17,7 +17,6 @@ from pymoo.operators.selection.tournament import TournamentSelection
 from pymoo.optimize import minimize
 from pymoo.util.ref_dirs import get_reference_directions
 from pymoo.visualization.scatter import Scatter
-from helper import recorder
 from helper.metric_calculator import MetricCalculator
 from helper.random import Random
 from helper.reporter import Reporter
@@ -153,7 +152,6 @@ def run_optimization_from_streamlit(conf):
         reporter.history_writer(run, res, algorithm.__class__.__name__, stop - start)
         reporter.show_and_save_plot(problem, res, run, algorithm.__class__.__name__)
         reporter.show_and_save_metric_plots(res, algorithm.__class__.__name__, run)
-        recorder.record(res)
 
         # ✅ 전체 5일치 식단표를 표로 출력
         all_days_data = []
