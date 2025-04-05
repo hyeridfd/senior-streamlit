@@ -22,7 +22,7 @@ def get_session_history(session_id: str) -> BaseChatMessageHistory:
 
 
 def get_retriever(pinecone_key=None):
-    embedding = OpenAIEmbeddings(model='text-embedding-3-large', api_key=pinecone_key)
+    embedding = OpenAIEmbeddings(model='text-embedding-3-large', openai_api_key=api_key)
     index_name = 'senior-coach'
     database = PineconeVectorStore.from_existing_index(index_name=index_name, embedding=embedding)
     retriever = database.as_retriever(search_kwargs={'k': 2})
