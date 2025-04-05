@@ -61,7 +61,7 @@ def get_llm(api_key=None, model='gpt-4o'):
     print("🔑 api_key:", api_key)
     print("🧐 ChatOpenAI signature:", inspect.signature(ChatOpenAI.__init__))
 
-    return ChatOpenAI(model=model, temperature=0.0, api_key=api_key)
+    return ChatOpenAI(model=model, temperature=0.0, openai_api_key=api_key)
 
 
 def get_dictionary_chain(api_key=None):
