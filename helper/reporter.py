@@ -12,7 +12,6 @@ from pymoo.indicators.kktpm import KKTPM
 from pymoo.visualization.scatter import Scatter
 
 import constants
-from helper import recorder
 from helper.metric_calculator import MetricCalculator
 from solution import Solution
 
