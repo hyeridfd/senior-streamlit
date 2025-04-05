@@ -30,7 +30,7 @@ def get_retriever(pinecone_key=None):
 
 def get_history_retriever(api_key=None, pinecone_key=None):
     llm = get_llm(api_key)
-    retriever = get_retriever(pinecone_key)
+    retriever = get_retriever(api_key)
     
     contextualize_q_system_prompt = (
         "Given a chat history and the latest user question "
