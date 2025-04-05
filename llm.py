@@ -55,7 +55,7 @@ def get_history_retriever(api_key=None, pinecone_key=None):
 
 
 def get_llm(api_key=None, model='gpt-4o'):
-    return ChatOpenAI(model_name=model, temperature=0.0, openai_api_key=api_key)
+    return ChatOpenAI(model=model, temperature=0.0, openai_api_key=api_key)
 
 
 def get_dictionary_chain(api_key=None):
