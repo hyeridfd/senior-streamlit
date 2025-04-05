@@ -14,6 +14,8 @@ from config import answer_examples
 
 store = {}
 
+api_key=st.secrets["OPENAI_API_KEY"]
+pinecone_key=st.secrets["PINECONE_API_KEY"]
 
 def get_session_history(session_id: str) -> BaseChatMessageHistory:
     if session_id not in store:
