@@ -21,16 +21,16 @@ def get_session_history(session_id: str) -> BaseChatMessageHistory:
     return store[session_id]
 
 
-def get_retriever():
-    embedding = OpenAIEmbeddings(model='text-embedding-3-large')
+def get_retriever(pinecone_key=None):
+    embedding = OpenAIEmbeddings(model='text-embedding-3-large', openai_api_key=pinecone_key)
     index_name = 'senior-coach'
     database = PineconeVectorStore.from_existing_index(index_name=index_name, embedding=embedding)
     retriever = database.as_retriever(search_kwargs={'k': 2})
     return retriever
 
-def get_history_retriever():
-    llm = get_llm()
-    retriever = get_retriever()
+def get_history_retriever(api_key=None, pinecone_key=None):
+    llm = get_llm(api_key)
+    retriever = get_retriever(pinecone_key)
     
     contextualize_q_system_prompt = (
         "Given a chat history and the latest user question "
@@ -54,14 +54,13 @@ def get_history_retriever():
     return history_aware_retriever
 
 
-def get_llm(model='gpt-4o'):
-    llm = ChatOpenAI(model=model, temperature=0.0)
-    return llm
+def get_llm(api_key=None, model='gpt-4o'):
+    return ChatOpenAI(model=model, temperature=0.0, openai_api_key=api_key)
 
 
-def get_dictionary_chain():
+def get_dictionary_chain(api_key=None):
     dictionary = ["사람을 나타내는 표현 -> 거주자"]
-    llm = get_llm()
+    llm = get_llm(api_key)
     prompt = ChatPromptTemplate.from_template(f"""
         사용자의 질문을 보고, 우리의 사전을 참고해서 사용자의 질문을 변경해주세요.
         만약 변경할 필요가 없다고 판단된다면, 사용자의 질문을 변경하지 않아도 됩니다.
@@ -76,8 +75,8 @@ def get_dictionary_chain():
     return dictionary_chain
 
 
-def get_rag_chain():
-    llm = get_llm()
+def get_rag_chain(api_key=None, pinecone_key=None):
+    llm = get_llm(api_key)
     example_prompt = ChatPromptTemplate.from_messages(
         [
             ("human", "{input}"),
@@ -115,7 +114,7 @@ def get_rag_chain():
             ("human", "{input}"),
         ]
     )
-    history_aware_retriever = get_history_retriever()
+    history_aware_retriever = get_history_retriever(api_key, pinecone_key)
     question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
 
     rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
@@ -131,9 +130,9 @@ def get_rag_chain():
     return conversational_rag_chain
 
 
-def get_ai_response(user_message, stream=False):
-    dictionary_chain = get_dictionary_chain()
-    rag_chain = get_rag_chain()
+def get_ai_response(user_message, api_key=None, pinecone_key=None, stream=False):
+    dictionary_chain = get_dictionary_chain(api_key)
+    rag_chain = get_rag_chain(api_key, pinecone_key)
     tax_chain = {"input": dictionary_chain} | rag_chain
     ai_response = tax_chain.stream(
         {
@@ -143,5 +142,4 @@ def get_ai_response(user_message, stream=False):
             "configurable": {"session_id": "abc123"}
         },
     )
-
     return ai_response
