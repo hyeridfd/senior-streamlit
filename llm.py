@@ -10,6 +10,7 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 import inspect
+from openai import OpenAI
 from config import answer_examples
 
 store = {}
@@ -61,12 +62,9 @@ def get_llm(api_key=None, model='gpt-4o'):
     print("🔑 api_key:", api_key)
     print("🧐 ChatOpenAI signature:", inspect.signature(ChatOpenAI.__init__))
 
-    kwargs = {
-        "model": model,
-        "temperature": 0.0,
-        "openai_api_key": api_key
-    }
-    return ChatOpenAI(**kwargs)
+    client = OpenAI(api_key=api_key)
+    return ChatOpenAI(client=client, model=model, temperature=0.0)
+
 
 
 def get_dictionary_chain(api_key=None):
