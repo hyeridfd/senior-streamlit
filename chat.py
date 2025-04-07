@@ -10,8 +10,8 @@ from helper.config import Config
 from pymoo_runner import run_optimization_from_streamlit
 
 # 초기 설정
-st.set_page_config(page_title="고령자 건강 챗봇", page_icon="🧓")
-st.title("고령자 라이프스타일 코칭 챗봇")
+st.set_page_config(page_title="시니어 맞춤형 프리미엄 헬스케어 솔루션", page_icon="🧓")
+st.title("시니어 맞춤형 프리미엄 헬스케어 솔루션")
 st.caption("식단 최적화와 라이프스타일 코칭을 한 번에!")
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
@@ -86,18 +86,18 @@ if mode == "🥗 개인 맞춤 식단 추천":
             st.info("⏳ 식단 최적화 진행 중입니다...")
             best_solution = run_optimization_from_streamlit(conf)
 
-            # 3. 결과 출력
-            st.success("✅ 최적 식단이 도출되었습니다!")
-            for day_idx, day in enumerate(best_solution.days):
-                st.markdown(f"**Day {day_idx + 1}**")
-                for _, row in day.dish_types.iterrows():
-                    st.write(
-                        f"- {row['meal_name']} (열량: {row['energy']} kcal, 탄수화물: {row['cho']}g, 단백질: {row['protein']}g, 지방: {row['fat']}g, 저작단계: {row['chewing_stage']})"
-                    )
+        #     # 3. 결과 출력
+        #     st.success("✅ 최적 식단이 도출되었습니다!")
+        #     for day_idx, day in enumerate(best_solution.days):
+        #         st.markdown(f"**Day {day_idx + 1}**")
+        #         for _, row in day.dish_types.iterrows():
+        #             st.write(
+        #                 f"- {row['meal_name']} (열량: {row['energy']} kcal, 탄수화물: {row['cho']}g, 단백질: {row['protein']}g, 지방: {row['fat']}g, 저작단계: {row['chewing_stage']})"
+        #             )
 
-        except Exception as e:
-            st.error(f"❌ 오류 발생: {e}")
-            st.text(traceback.format_exc())
+        # except Exception as e:
+        #     st.error(f"❌ 오류 발생: {e}")
+        #     st.text(traceback.format_exc())
 
 # ================================
 # 💬 라이프스타일 코칭 모드
