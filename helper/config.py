@@ -87,27 +87,11 @@ class Config:
         self.FITNESS_FUNCTIONS = [
             {
                 'function': NutrientFitness({
-                    'kcal': (self.ENERGY * 0.9, self.ENERGY * 1.5)
-                }),
-                'weight': 0.2
-            },
-            {
-                'function': NutrientFitness({
-                    'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.5)
-                }),
-                'weight': 0.2
-            },
-            {
-                'function': NutrientFitness({
-                    'fat': (self.FAT * 0.9, self.FAT * 1.5)
-                }),
-                'weight': 0.2
-            },
-            {
-                'function': NutrientFitness({
+                    'kcal': (self.ENERGY * 0.9, self.ENERGY * 1.5),
+                    'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.5),
+                    'fat': (self.FAT * 0.9, self.FAT * 1.5),
                     'cho': (self.CHO * 0.9, self.CHO * 1.5)
-                }),
-                'weight': 0.2
+            }), 'weight': 0.3 
             },
             {
                 'function': ChewingStageFitness(self.CHEWING_STAGE),
@@ -115,11 +99,11 @@ class Config:
             },
             {
                 'function': MainIngredientFitness(),
-                'weight': 0.05
+                'weight': 0.3
             },
             {
                 'function': RepetitionFitness(),
-                'weight': 0.05
+                'weight': 0.3
             },
             {
                 'function': PreferenceFitness(self.PREFERENCE),
