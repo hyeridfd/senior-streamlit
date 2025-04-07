@@ -73,10 +73,10 @@ class Config:
             self.PREFERENCE = float(config['MENU']['Preference'])
 
         self.NUTRIENT_BOUNDS = {  # 기본 영양 기준
-            'kcal': (self.ENERGY * 0.9, self.ENERGY * 1.1),
-            'cho': (self.CHO * 0.9, self.CHO * 1.1),
-            'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.1),
-            'fat': (self.FAT * 0.9, self.FAT * 1.1),
+            'kcal': (self.ENERGY * 0.9, self.ENERGY * 1.5),
+            'cho': (self.CHO * 0.9, self.CHO * 1.5),
+            'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.5),
+            'fat': (self.FAT * 0.9, self.FAT * 1.5),
             }
         # Print NUTRIENT_BOUNDS to verify it is set correctly
         print(f"[DEBUG] NUTRIENT_BOUNDS: {self.NUTRIENT_BOUNDS}")
