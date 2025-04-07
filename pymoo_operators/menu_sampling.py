@@ -34,6 +34,7 @@ class MenuSampling(Sampling):
 
             dish_types = pd.concat(sampled_list, ignore_index=True)  # append → concat
             days += [Day(dish_types)]
-
-        return Solution(days, fitness_functions=copy.deepcopy(problem.fitness_functions))
-
+            
+        sol = Solution(days, fitness_functions=copy.deepcopy(problem.fitness_functions))
+        print("[SAMPLE] 새 개체 생성됨:", sol)
+        return sol
