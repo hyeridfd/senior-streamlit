@@ -113,11 +113,12 @@ class MenuPlanningProblem(ElementwiseProblem):
             raise ValueError(f"Unknown dish_type: {dish_type}")
     #def get_one_dish_type(self, dish_type):
         #return self.df[self.df[constants.DISH_TYPE_INDEX] == dish_type].sample()
-
+    
     def _evaluate(self, x, out, *args, **kwargs):
         # append 제거: 리스트 컴프리헨션으로 한 줄 처리
         fitness_list = [self._evaluate_fitness(ff, x[0]) for ff in x[0].fitness_functions]
-        x[0].total_fitness = sum(fitness_list) / len(fitness_list)
+        total_fitness = sum(fitness_list) / len(fitness_list)
+        x[0].total_fitness = total_fitness
         out["F"] = np.array(fitness_list, dtype=float)
     
     def _evaluate_fitness(self, ff, individual):
