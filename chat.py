@@ -96,8 +96,8 @@ if mode == "🥗 개인 맞춤 식단 추천":
         #             )
 
          except Exception as e:
-             st.error(f"❌ 오류 발생: {e}")
-             st.text(traceback.format_exc())
+            st.error(f"❌ 오류 발생: {e}")
+            st.text(traceback.format_exc())
 
 # ================================
 # 💬 라이프스타일 코칭 모드
