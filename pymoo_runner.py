@@ -71,7 +71,6 @@ def get_algorithm(algorithm_name, number_of_population):
                             mutation=PymooMutation(),
                             eliminate_duplicates=Duplicates(),
                             evaluator=evaluator)
-
     elif algorithm_name == 'SPEA2':
         algorithm = SPEA2(
             pop_size=number_of_population,
