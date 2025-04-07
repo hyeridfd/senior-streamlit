@@ -95,7 +95,7 @@ if mode == "🥗 개인 맞춤 식단 추천":
         #                 f"- {row['meal_name']} (열량: {row['energy']} kcal, 탄수화물: {row['cho']}g, 단백질: {row['protein']}g, 지방: {row['fat']}g, 저작단계: {row['chewing_stage']})"
         #             )
 
-         except Exception as e:
+        except Exception as e:
             st.error(f"❌ 오류 발생: {e}")
             st.text(traceback.format_exc())
 
