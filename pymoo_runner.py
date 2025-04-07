@@ -12,6 +12,7 @@ from pymoo.algorithms.moo.nsga2 import NSGA2, RankAndCrowdingSurvival, binary_to
 from pymoo.algorithms.moo.nsga3 import NSGA3
 from pymoo.algorithms.moo.rnsga2 import RNSGA2
 from pymoo.algorithms.moo.sms import SMSEMOA
+from pymoo.algorithms.moo.spea2 import SPEA2
 from pymoo.core.evaluator import Evaluator
 from pymoo.operators.selection.tournament import TournamentSelection
 from pymoo.optimize import minimize
@@ -70,6 +71,16 @@ def get_algorithm(algorithm_name, number_of_population):
                             mutation=PymooMutation(),
                             eliminate_duplicates=Duplicates(),
                             evaluator=evaluator)
+
+    elif algorithm_name == 'SPEA2':
+        algorithm = SPEA2(
+            pop_size=number_of_population,
+            sampling=MenuSampling(),
+            crossover=PymooCrossover(),
+            mutation=PymooMutation(),
+            eliminate_duplicates=Duplicates(),
+            evaluator=evaluator
+        )
     return algorithm
 
 
@@ -88,7 +99,7 @@ def run_optimization_from_streamlit(conf):
     reporter = Reporter(conf)
     rand = Random(conf)
     seed_value = int(rand.random.integers(0, 10000))
-    st.write(f"🎲 랜덤 Seed: {seed_value}")
+    #st.write(f"🎲 랜덤 Seed: {seed_value}")
 
     for run in range(conf.RUN_TIME):
         start = timeit.default_timer()
@@ -107,31 +118,48 @@ def run_optimization_from_streamlit(conf):
 
             for i, ind in enumerate(h.pop):
                 val = ind.X
-                if isinstance(val, np.ndarray) and len(val) > 0:
-                    val = val[0]
-                if isinstance(val, tuple) and hasattr(val[0], "days"):
+                # val이 Solution 객체라면 바로 사용
+                if isinstance(val, Solution):
+                    ind.data["solution"] = val
+                    ind.data["total_fitness"] = val.total_fitness
+                    print(f"[DEBUG] ind.X is Solution. total_fitness: {val.total_fitness}")
+                # val이 ndarray이면서 첫 번째가 Solution이면
+                elif isinstance(val, np.ndarray) and isinstance(val[0], Solution):
+                    ind.data["solution"] = val[0]
+                    ind.data["total_fitness"] = val[0].total_fitness
+                    print(f"[DEBUG] ind.X[0] is Solution. total_fitness: {val[0].total_fitness}")
+                # 그 외에 튜플 형태로 받은 경우 (옛날 코드)
+                elif isinstance(val, tuple) and hasattr(val[0], "days"):
                     ind.data["solution"] = val[0]
                     ind.data["total_fitness"] = val[1]
+                    print(f"[DEBUG] val is tuple. total_fitness: {val[1]}")
+                else:
+                    print(f"[WARNING] 예상치 못한 ind.X 형식: {type(val)}")
 
                 total_fitness = ind.data.get("total_fitness")
-                if total_fitness is not None:
-                    st.write(f"👤 개체 {i}: fitness = {total_fitness:.4f}")
-                    print(f"[DEBUG] 개체 {i}의 total_fitness: {total_fitness}")
-                    if total_fitness < best_fitness:
-                        best_fitness = total_fitness
-                        best_ind = ind.data["solution"]
+                print(f"[DEBUG] 개체 {i}의 total_fitness: {total_fitness}")
+                if total_fitness is not None and total_fitness < best_fitness:
+                    best_fitness = total_fitness
+                    best_ind = ind.data["solution"]
 
-                # ✅ 세대 내 최고 적합도 개체 출력
-            if best_ind:
-                st.success(f"🌟 Generation {gen_idx + 1} 최고 적합도: {best_fitness:.4f}")
-                with st.expander("📅 미리보기 (Day 1)"):
-                    for day_idx, day in enumerate(best_ind.days[:1]):
-                        for _, row in day.dish_types.iterrows():
-                            pref_kor = reverse_preference_map.get(row['preference'], "정보없음")
-                            st.write(
-                                f"- {row['meal_name']} "
-                                f"(열량: {row['energy']} kcal, 탄수화물: {row['cho']}g, 단백질: {row['protein']}g, 지방: {row['fat']}g, 선호도: {pref_kor})"
-                            )
+            #     # ✅ 세대 내 최고 적합도 개체 출력
+            # print(f"[DEBUG] Generation {gen_idx + 1} - best_ind type: {type(best_ind)}")
+            # print(f"[DEBUG] 개체 {i}의 total_fitness: {ind.data.get('total_fitness')}")
+            # if best_ind and hasattr(best_ind, "days"):
+            #     st.success(f"🌟 Generation {gen_idx + 1} 최고 적합도: {best_fitness:.4f}")
+            #     with st.expander("📅 미리보기 (Day 1)"):
+            #         try:
+            #             for day_idx, day in enumerate(best_ind.days[:1]):
+            #                 for _, row in day.dish_types.iterrows():
+            #                     pref_kor = reverse_preference_map.get(row['preference'], "정보없음")
+            #                     st.write(
+            #                         f"- {row['meal_name']} "
+            #                         f"(열량: {row['energy']} kcal, 탄수화물: {row['cho']}g, 단백질: {row['protein']}g, 지방: {row['fat']}g, 선호도: {pref_kor})"
+            #                     )
+            #         except Exception as e:
+            #             st.warning(f"⚠️ 식단 미리보기 출력 실패: {e}")
+            # else:
+            #     st.info(f"🔍 Generation {gen_idx + 1}에서 출력할 best_ind 없음 (type: {type(best_ind)})")
 
         F_vals = res.F
         best_idx = np.argmin(np.sum(F_vals, axis=1)) if len(F_vals.shape) > 1 else np.argmin(F_vals)
@@ -179,6 +207,7 @@ def run_optimization_from_streamlit(conf):
         # 표 출력
         st.markdown("## 🍴 최적화된 5일치 식단표")
         st.dataframe(preview_df, use_container_width=True)
+        st.markdown(f"### 🎯 총 적합도 점수: **{best_sol.total_fitness:.4f}**")
 
 # 2. Display meal description
         st.subheader("🥗 식단 설명")
@@ -222,7 +251,7 @@ def run_optimization_from_streamlit(conf):
         protein_min, protein_max = conf.NUTRIENT_BOUNDS["protein"]
         fat_min, fat_max = conf.NUTRIENT_BOUNDS["fat"]
 
-        fig, axes = plt.subplots(3, 1, figsize=(8, 10))
+        fig, axes = plt.subplots(4, 1, figsize=(8, 12))
 
         nutrient_info = [
             ("Energy", kcal_min, kcal_max, "energy(kcal)"),
@@ -233,72 +262,12 @@ def run_optimization_from_streamlit(conf):
 
         # 영양소 적합도 시각화 추가
         for ax, (key, min_val, max_val, title) in zip(axes, nutrient_info):
-            ax.bar(df_nutrients["Day"], df_nutrients[key], color="pink")
-            ax.axhline(min_val, color='blue', linestyle='--', label='MAX')
-            ax.axhline(max_val, color='red', linestyle='--', label='MIN')
+            ax.bar(df_nutrients["Day"], df_nutrients[key], color="skyblue")
+            ax.axhline(max_val, color='red', linestyle='--', label='MAX')
+            ax.axhline(min_val, color='blue', linestyle='--', label='MIN')
             ax.set_title(title)
             ax.set_ylabel("AMOUNT")
             ax.legend()
 
         plt.tight_layout()
         st.pyplot(fig)
-
-        # # ✅ 각 일별 영양소 적합도 표시
-        # st.markdown("## 🥇 각 날의 영양소 적합도")
-        # fit_scores = []
-        # for day_idx, day in enumerate(best_sol.days):
-        #     score = 0
-        #     # Calculate fit score based on nutrient range
-        #     if kcal_min <= day.dish_types["energy"].sum() <= kcal_max:
-        #         score += 1
-        #     if protein_min <= day.dish_types["protein"].sum() <= protein_max:
-        #         score += 1
-        #     if fat_min <= day.dish_types["fat"].sum() <= fat_max:
-        #         score += 1
-        #     fit_scores.append(score)
-
-        # 적합도 그래프
-        #st.bar_chart(fit_scores)
-
-        return best_sol
-    
-        # # ✅ 하루별 영양소 섭취량 계산
-        # daily_nutrients = {"Day": [], "Energy": [], "Protein": [], "Fat": []}
-        # for day_idx, day in enumerate(best_sol.days):
-        #     energy = day.dish_types["energy"].sum()
-        #     protein = day.dish_types["protein"].sum()
-        #     fat = day.dish_types["fat"].sum()
-        #     daily_nutrients["Day"].append(f"Day {day_idx + 1}")
-        #     daily_nutrients["Energy"].append(energy)
-        #     daily_nutrients["Protein"].append(protein)
-        #     daily_nutrients["Fat"].append(fat)
-
-        # df_nutrients = pd.DataFrame(daily_nutrients)
-
-        # # ✅ 기준값 가져오기
-        # kcal_min, kcal_max = conf.NUTRIENT_BOUNDS["kcal"]
-        # protein_min, protein_max = conf.NUTRIENT_BOUNDS["protein"]
-        # fat_min, fat_max = conf.NUTRIENT_BOUNDS["fat"]
-
-        # st.markdown("## 일별 영양소 섭취량 vs 기준")
-
-        # fig, axes = plt.subplots(3, 1, figsize=(8, 10))
-
-        # nutrient_info = [
-        #     ("Energy", kcal_min, kcal_max, "🔥 에너지 (kcal)"),
-        #     ("Protein", protein_min, protein_max, "🥩 단백질 (g)"),
-        #     ("Fat", fat_min, fat_max, "🫒 지방 (g)")
-        # ]
-
-        # for ax, (key, min_val, max_val, title) in zip(axes, nutrient_info):
-        #     ax.bar(df_nutrients["Day"], df_nutrients[key], color="skyblue")
-        #     ax.axhline(min_val, color='orange', linestyle='--', label='하한선')
-        #     ax.axhline(max_val, color='green', linestyle='--', label='상한선')
-        #     ax.set_title(title)
-        #     ax.set_ylabel("섭취량")
-        #     ax.legend()
-
-        # plt.tight_layout()
-        # st.pyplot(fig)
-
-        # return best_sol
