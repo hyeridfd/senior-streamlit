@@ -25,7 +25,7 @@ class MenuPlanningProblem(ElementwiseProblem):
             if df is not None:
                 self.df = df
             else:
-                self.df = pd.read_csv(file_path, encoding='cp949')
+                self.df = pd.read_csv(file_path, encoding='utf-8-sig')
         except Exception as e:
             print("❌ CSV 파일을 불러오는 중 에러 발생:", e)
             sys.exit(1)
