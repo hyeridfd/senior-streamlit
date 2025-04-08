@@ -65,7 +65,16 @@ st.markdown("""
         color: #0d47a1 !important;
         border-radius: 8px !important;
     }
-
+     /* 👇 추가 부분 */
+        div[data-baseweb="select"] > div {
+            background-color: white !important;
+            border-radius: 0px !important;
+            color: black !important;
+        }
+    
+        div[data-baseweb="select"] {
+            border-radius: 0px !important;
+        }
     /* 폼 내부 간격 */
     .stForm > div {
         gap: 1rem;
