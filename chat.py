@@ -135,9 +135,9 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
 
             # 1. 영양 기준 계산
             kcal_range, carbs_range, protein_range, fat_range = get_lunch_nutrient_ranges(
-                sex, age, weight, height, pa, waist
+                sex, age, weight, height, pa, waist, chewing_stage_value, preference
             )
-            profile = get_lunch_nutrient_profile(sex, age, weight, height, pa, waist)
+            profile = get_lunch_nutrient_profile(sex, age, weight, height, pa, waist, chewing_stage_value, preference)
 
             st.subheader("🍽️ 한 끼 기준 영양 정보")
             st.text(profile)
