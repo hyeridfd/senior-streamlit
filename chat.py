@@ -49,6 +49,8 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 # 버튼 UI
+mode = st.session_state.get("mode", "🥗 개인 맞춤 식단 추천")
+
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
@@ -62,9 +64,7 @@ if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=Tru
 if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True):
     st.session_state.mode = "💬 라이프스타일 코칭"
     st.rerun()
-    
-mode = st.session_state.get("mode", "🥗 개인 맞춤 식단 추천")
-# ================================
+    # ================================
 # 🥗 식단 최적화 모드
 # ================================
 if mode == "🥗 개인 맞춤 식단 추천":
