@@ -15,7 +15,7 @@ st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page
 st.sidebar.markdown("""
     <style>
     section[data-testid="stSidebar"] {
-        background-color: #f3e8ff !important; /* 연한 보라 배경 */
+        background-color: #f7fadb !important;
     }
 
     div.stButton > button {
@@ -23,33 +23,39 @@ st.sidebar.markdown("""
         font-size: 22px;
         font-weight: 600;
         border-radius: 12px;
-        margin-bottom: 0.5rem;
-        width: 100%;
-        background-color: #d6c4f8; /* 연보라 버튼 */
-        border: 1px solid #bba2f7;
-        color: #4b0082;
-        transition: all 0.3s ease;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease-in-out;
+        background-color: #eaf291;
+        border: 1px solid #d6d84c;
+        color: #444;
     }
 
     div.stButton > button:hover {
-        background-color: #eae2ff;
-        border-color: #a58ce8;
-        color: #5d3fd3;
+        background-color: #dce75b;
+        border: 1px solid #a3a93d;
+        color: #2e2e2e;
     }
 
     div.stButton > button:focus {
         outline: none;
         box-shadow: none;
+        border: 1px solid #d0d0d0;
     }
 
     .selected-button {
-        background-color: #b695f8 !important;
-        border: 1px solid #9e76e0 !important;
+        background-color: #B8BF3D !important;
+        border: 1px solid #90972b !important;
         color: white !important;
+    }
+
+    h3.sidebar-title {
+        color: #B8BF3D;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
     </style>
 """, unsafe_allow_html=True)
-
 
 st.markdown(
     '<h3 style="color:#6a0dad; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
@@ -92,10 +98,7 @@ st.sidebar.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown(
-    '<h3 style="color:#7b4bb7; font-size:28px; font-weight:bold;">모드 선택</h3>',
-    unsafe_allow_html=True
-)
+st.sidebar.markdown('<h3 class="sidebar-title">모드 선택</h3>', unsafe_allow_html=True)
 
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
