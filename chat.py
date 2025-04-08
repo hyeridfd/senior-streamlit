@@ -63,7 +63,7 @@ if st.sidebar.button("💬 라이프스타일 코칭", key="life_button", use_co
     st.session_state.mode = "💬 라이프스타일 코칭"
     st.rerun()
     
-mode = st.session_state.mode
+mode = st.session_state.get("mode", "🥗 개인 맞춤 식단 추천")
 # ================================
 # 🥗 식단 최적화 모드
 # ================================
