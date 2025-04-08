@@ -315,7 +315,14 @@ class Reporter:
         plt.title("Convergence - {}".format(algorithm))
         plt.xlabel("Function Evaluations")
         plt.ylabel(metric_name) 
-        plt.yscale("log")
+
+            # ⚠️ 로그 스케일 조건 검사
+        if all(v > 0 for v in result):
+            plt.yscale("log")
+        else:
+            print(f"[WARNING] {metric_name} 값에 0 이하가 있어서 로그스케일 생략")
+            
+        #plt.yscale("log")
         plt.legend()
         plt.tight_layout()
         plt.savefig(save_path, dpi=300)
