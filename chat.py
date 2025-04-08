@@ -23,7 +23,7 @@ print("✅ openai version:", openai.__version__)
 if 'message_list' not in st.session_state:
     st.session_state.message_list = []
 if 'mode' not in st.session_state:
-    st.session_state.mode = "diet"   
+    st.session_state.mode = "🥗 개인 맞춤 식단 추천"   
 
 # 🟡 모드 선택
 st.sidebar.title("모드 선택")
@@ -34,11 +34,11 @@ col1 = st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width
 col2 = st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
 
 if col1:
-    st.session_state.mode = "diet"
+    st.session_state.mode = "🥗 개인 맞춤 식단 추천"
     st.rerun()
 
 if col2:
-    st.session_state.mode = "life"
+    st.session_state.mode = "💬 라이프스타일 코칭""
     st.rerun()
 
 # 현재 선택된 모드
