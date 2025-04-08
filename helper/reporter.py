@@ -292,6 +292,8 @@ class Reporter:
         self.conv_plot(algorithm, n_evals, opt, run)
 
     def draw_metric_plot(self, algorithm, n_evals, result, title, metric_name, save_path):
+        print(f"[CHECK] {metric_name} 최소값: {np.min(result)}")
+        print(f"[CHECK] {metric_name} 값들: {result}")
         plt.clf()
         plt.plot(n_evals, result, color='black', lw=0.7, label=title)
         plt.scatter(n_evals, result, facecolor="none", edgecolor='black', marker="p")
