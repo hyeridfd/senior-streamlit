@@ -93,7 +93,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown(
-    '<h3 style="color:#0466c8; font-size:28px; font-weight:bold;">모드 선택</h3>',
+    '<h3 style="color:#af99ff; font-size:28px; font-weight:bold;">모드 선택</h3>',
     unsafe_allow_html=True
 )
 st.sidebar.markdown("무엇을 도와드릴까요?")
