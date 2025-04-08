@@ -22,28 +22,51 @@ print("✅ openai version:", openai.__version__)
 # 세션 상태 초기화
 if 'message_list' not in st.session_state:
     st.session_state.message_list = []
+
 if 'mode' not in st.session_state:
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"   
 
-# 🟡 모드 선택
+# 모드 선택
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
 st.sidebar.markdown("""
     <style>
     div.stButton > button {
-        padding: 1rem 1rem;
-        font-size: 18px;
-        font-weight: bold;
+        padding: 1rem 1.5rem;
+        font-size: 22px;
+        font-weight: 600;
+        border-radius: 12px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease-in-out;
+        background-color: #f0f2f6;
+        border: 1px solid #d0d0d0;
+        color: #000000;
+    }
+
+    div.stButton > button:hover {
+        background-color: #e3f2fd;
+        border: 1px solid #2196f3;
+        color: #0d47a1;
+    }
+
+    /* 클릭 후 선택된 버튼을 강조하고 싶다면 아래에 조건부 스타일 삽입 가능 */
+    .selected-button {
+        background-color: #1976d2 !important;
+        border: 1px solid #0d47a1 !important;
+        color: white !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
+diet_clicked = st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True)
+life_clicked = st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
+
+# 상태 반영 및 rerun
+if diet_clicked:
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"
     st.rerun()
-
-if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True):
+if life_clicked:
     st.session_state.mode = "💬 라이프스타일 코칭"
     st.rerun()
 
