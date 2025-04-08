@@ -18,62 +18,49 @@ st.markdown("""
     html, body, [class*="css"] {
         font-family: 'Noto Sans KR', sans-serif;
         background-color: #f9fbfc;
-        color: #0d47a1;
+        color: #333333;
     }
 
-    /* 제목 스타일 */
-    h1 {
-        color: #0d47a1 !important;
+    /* 입력창 스타일 초기화 */
+    .stTextInput input, .stNumberInput input, .stSelectbox div {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border-radius: 8px !important;
+        border: 1px solid #dcdcdc !important;
+        box-shadow: none !important;
     }
 
-    /* 캡션 스타일 */
-    .stCaption {
-        color: #1565c0;
-        font-size: 16px;
+    /* selectbox 기본값도 깔끔하게 */
+    div[data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        border-radius: 8px !important;
+        border: 1px solid #dcdcdc !important;
+        color: #000000 !important;
     }
 
-    /* 버튼 스타일 */
-    .stButton > button {
-        background-color: #e3f2fd;
-        color: #0d47a1;
-        border: 1px solid #2196f3;
-        font-size: 20px;
-        font-weight: 600;
-        border-radius: 12px;
-        padding: 0.8rem 1.5rem;
-        width: 100%;
-        margin-bottom: 0.5rem;
-        transition: all 0.3s ease-in-out;
+    div[data-baseweb="select"] {
+        border-radius: 8px !important;
     }
 
-    .stButton > button:hover {
-        background-color: #bbdefb;
-        color: #0d47a1;
-        border-color: #1976d2;
+    /* 선택된 label 둥글고 파란 배경 제거 */
+    span[data-baseweb="tag"],
+    span[style*="background-color: rgb(232, 244, 253)"],
+    span[style*="border-radius: 999em"],
+    span[style*="border-radius: 16px"],
+    mark {
+        background-color: transparent !important;
+        border-radius: 0px !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: inherit !important;
     }
 
-    /* 선택된 버튼 강조 */
-    .selected {
-        background-color: #1976d2 !important;
-        color: white !important;
-        border-color: #0d47a1 !important;
-    }
-
-    /* 👉 입력창 스타일: 기본 회색 배경으로 돌림 */
-    .stTextInput input,
-    .stNumberInput input,
-    .stSelectbox div {
-        background-color: white !important;
-        color: black !important;
-        border-radius: 4px !important;
-    }
     /* 폼 내부 간격 */
     .stForm > div {
         gap: 1rem;
     }
     </style>
 """, unsafe_allow_html=True)
-
 
 st.title("시니어 맞춤형 헬스케어 솔루션")
 st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추천과 라이프스타일 코칭을 제공합니다.")
