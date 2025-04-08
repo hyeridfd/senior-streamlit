@@ -276,6 +276,17 @@ class Reporter:
         igd_metric = IGD(pf=np.array([0] * self.config.FITNESS_FUNCTIONS.__len__()), zero_to_one=False)
         igd_p_metric = IGDPlus(pf=np.array([0] * self.config.FITNESS_FUNCTIONS.__len__()), zero_to_one=False)
 
+        # 📌 여기서 디버깅!
+        print("📌 GD 계산 디버깅 ------------------")
+        for i, (_F, eval_num) in enumerate(zip(hist_F, n_evals)):
+            print(f"📘 Generation {i+1} - Function Evaluations: {eval_num}")
+            print("F 값:\n", _F)
+            print("→ GD:", gd_metric.do(_F))
+            print("→ GD+:", gd_p_metric.do(_F))
+            print("→ IGD:", igd_metric.do(_F))
+            print("→ IGD+:", igd_p_metric.do(_F))
+            print("-" * 40)
+            
         hypervolume = [hypervolume_metric.do(_F) for _F in hist_F]
         gd = [gd_metric.do(_F) for _F in hist_F]
         gd_p = [gd_p_metric.do(_F) for _F in hist_F]
@@ -293,6 +304,7 @@ class Reporter:
         self.draw_metric_plot(algorithm, n_evals, igd_p, "Avg. IGD+ of Pop",
                               "IGD+", "{}_{}_{}.png".format(self.igd_p_file_path, algorithm, run))
         self.conv_plot(algorithm, n_evals, opt, run)
+
 
     def draw_metric_plot(self, algorithm, n_evals, result, title, metric_name, save_path):
         print(f"[CHECK] {metric_name} 최소값: {np.min(result)}")
