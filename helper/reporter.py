@@ -262,6 +262,9 @@ class Reporter:
             n_evals = n_evals + [algo.evaluator.n_eval]
             # retrieve the optimum from the algorithm
             opt = algo.opt
+            print("✅ 개체 수:", len(opt))
+            print("✅ opt.get('F'):", opt.get("F"))
+            print("✅ opt.get('feasible'):", opt.get("feasible"))
             # filter out only the feasible and append and objective space values
             feas = np.where(opt.get("feasible"))[0]
             hist_F = hist_F + [opt.get("F")[feas]]
