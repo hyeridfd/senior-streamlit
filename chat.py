@@ -124,33 +124,34 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
             waist = st.number_input("허리둘레 (cm)", min_value=50.0, max_value=150.0, value=85.0)
             chewing_stage = st.selectbox("저작 단계", ["1단계", "2단계", "3단계"], index=0)
             
+             # ✅ 여기에 버튼 스타일 적용
         st.markdown("""
             <style>
-            div.stForm button[type="submit"] {
-                background-color: #1976d2;
-                color: white;
-                border: 1px solid #0d47a1;
-                border-radius: 8px;
-                padding: 0.6rem 1.2rem;
-                font-size: 18px;
-                font-weight: 600;
-                transition: all 0.2s ease-in-out;
+            button[kind="primary"] {
+                background-color: #1976d2 !important;
+                color: white !important;
+                border: 1px solid #0d47a1 !important;
+                border-radius: 8px !important;
+                padding: 0.6rem 1.2rem !important;
+                font-size: 18px !important;
+                font-weight: 600 !important;
             }
-        
-            div.stForm button[type="submit"]:hover {
-                background-color: #1565c0;
-                border: 1px solid #0b3c91;
-                color: white;
+    
+            button[kind="primary"]:hover {
+                background-color: #1565c0 !important;
+                border-color: #0b3c91 !important;
+                color: white !important;
             }
-        
-            div.stForm button[type="submit"]:focus {
-                outline: none;
-                box-shadow: none;
+    
+            button[kind="primary"]:focus {
+                outline: none !important;
+                box-shadow: none !important;
             }
             </style>
         """, unsafe_allow_html=True)
-
+    
         submitted = st.form_submit_button("식단 최적화 실행")
+
 
     if submitted:
         try:
