@@ -38,7 +38,7 @@ if col1:
     st.rerun()
 
 if col2:
-    st.session_state.mode = "💬 라이프스타일 코칭""
+    st.session_state.mode = "💬 라이프스타일 코칭"
     st.rerun()
 
 # 현재 선택된 모드
