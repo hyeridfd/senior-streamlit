@@ -26,59 +26,64 @@ if 'message_list' not in st.session_state:
 if 'mode' not in st.session_state:
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"   
 
-# 모드 선택
-st.sidebar.title("모드 선택")
-st.sidebar.markdown("무엇을 도와드릴까요?")
+import streamlit as st
 
+# 세션 초기화
+if 'mode' not in st.session_state:
+    st.session_state.mode = "🥗 개인 맞춤 식단 추천"
+
+# CSS 스타일 삽입
 st.sidebar.markdown("""
     <style>
-    div.stButton > button {
+    .custom-button {
         padding: 1rem 1.5rem;
-        font-size: 30px;
+        font-size: 22px;
         font-weight: 600;
         border-radius: 12px;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease-in-out;
-        background-color: #f0f2f6;
+        margin-bottom: 0.5rem;
+        width: 100%;
         border: 1px solid #d0d0d0;
         color: #000000;
+        background-color: #f0f2f6;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease-in-out;
     }
-
-    div.stButton > button:hover {
+    .custom-button:hover {
         background-color: #e3f2fd;
-        border: 1px solid #2196f3;
+        border-color: #2196f3;
         color: #0d47a1;
     }
-
-    /* 클릭 후 선택된 버튼을 강조하고 싶다면 아래에 조건부 스타일 삽입 가능 */
-    div.stButton > button:focus {
+    .custom-button.selected {
+        background-color: #1976d2 !important;
+        border-color: #0d47a1 !important;
+        color: white !important;
+    }
+    .custom-button:focus {
         outline: none;
         box-shadow: none;
-        border: 1px solid #d0d0d0;
-    }
-    
-    .selected-button {
-        background-color: #1976d2 !important;
-        border: 1px solid #0d47a1 !important;
-        color: white !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-diet_clicked = st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True)
-life_clicked = st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
+# HTML로 버튼 렌더링
+def render_sidebar_button(label, emoji, mode_key):
+    selected_class = "selected" if st.session_state.mode == mode_key else ""
+    button_html = f"""
+        <form action="" method="post">
+            <button class="custom-button {selected_class}" name="mode" type="submit" value="{mode_key}">{emoji} {label}</button>
+        </form>
+    """
+    st.sidebar.markdown(button_html, unsafe_allow_html=True)
 
-# 상태 반영 및 rerun
-if diet_clicked:
-    st.session_state.mode = "🥗 개인 맞춤 식단 추천"
-    st.rerun()
-if life_clicked:
-    st.session_state.mode = "💬 라이프스타일 코칭"
-    st.rerun()
+# 버튼 UI
+st.sidebar.title("모드 선택")
+st.sidebar.markdown("무엇을 도와드릴까요?")
+render_sidebar_button("개인 맞춤 식단 추천", "🥗", "🥗 개인 맞춤 식단 추천")
+render_sidebar_button("라이프스타일 코칭", "💬", "💬 라이프스타일 코칭")
 
-# 현재 선택된 모드
+if st.sidebar.session_state.get("mode"):
+    st.session_state.mode = st.sidebar.session_state["mode"]
 mode = st.session_state.mode
-
 # ================================
 # 🥗 식단 최적화 모드
 # ================================
