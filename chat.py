@@ -27,22 +27,17 @@ if 'message_list' not in st.session_state:
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
-col1, col2 = st.sidebar.columns(2)
-with col1:
-    selected_diet = st.button("🥗 식단 추천")
-with col2:
-    selected_life = st.button("💬 코칭")
+if 'mode' not in st.session_state:
+    st.session_state.mode = "diet"  # 기본값
 
-# 버튼 누름에 따라 모드 설정
-if selected_diet:
+# 버튼을 위에서 아래로 배치
+if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
     st.session_state.mode = "diet"
-elif selected_life:
+
+if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True):
     st.session_state.mode = "life"
 
-# 세션 값이 없으면 기본값 설정
-if 'mode' not in st.session_state:
-    st.session_state.mode = "diet"
-
+# 현재 선택된 모드
 mode = st.session_state.mode
 
 # ================================
