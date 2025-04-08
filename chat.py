@@ -39,10 +39,11 @@ if col1:
 
 if col2:
     st.session_state.mode = "life"
-    st.experimental_rerun()
+    st.rerun()
 
 # 현재 선택된 모드
 mode = st.session_state.mode
+st.sidebar.markdown(f"🟢 현재 모드: {'🥗 개인 맞춤 식단 추천' if mode == 'diet' else '💬 라이프스타일 코칭'}")
 
 # ================================
 # 🥗 식단 최적화 모드
