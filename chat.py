@@ -89,7 +89,7 @@ st.sidebar.markdown("""
     <style>
     .stButton > button {
         padding: 1rem 1.5rem;
-        font-size: 22px;
+        font-size: 30px;
         font-weight: 600;
         border-radius: 12px;
         margin-bottom: 0.5rem;
