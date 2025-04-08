@@ -65,7 +65,7 @@ st.markdown(
 st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추천과 라이프스타일 코칭을 제공합니다.")
 
 st.markdown(
-    '<h3 style="color:#495057; font-size:28px; font-weight:500;">👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요</h3>',
+    '<h3 style="color:#495057; font-size:20px; font-weight:600;">👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요</h3>',
     unsafe_allow_html=True
 )
 
