@@ -63,7 +63,7 @@ def get_lunch_nutrient_ranges(sex, age, weight, height, pa, waist):
     fat_range = calculate_meal_distribution(fat_range)[1]
     return kcal_range, carbs_range, protein_range, fat_range
 
-def get_lunch_nutrient_profile(sex, age, weight, height, pa, waist, preference, chewing_stage):
+def get_lunch_nutrient_profile(sex, age, weight, height, pa, waist, preference, chewing_stage_value):
     daily_range = calculate_daily_intake(sex, age, weight, height, pa, waist)
     lunch_kcal_range = calculate_fixed_meal_distribution(daily_range[0])[1], calculate_fixed_meal_distribution(daily_range[1])[1]
 
@@ -84,7 +84,7 @@ def get_lunch_nutrient_profile(sex, age, weight, height, pa, waist, preference, 
         f"- 단백질: {lunch_protein[0]:.0f}~{lunch_protein[1]:.0f} g\n"
         f"- 지방: {lunch_fat[0]:.0f}~{lunch_fat[1]:.0f} g"
         f"- 식재료 선호도: {preference}"
-        f"- 저작단계: {chewing_stage}"
+        f"- 저작단계: {chewing_stage_value}"
     )
     return profile
 
