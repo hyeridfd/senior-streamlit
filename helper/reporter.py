@@ -333,6 +333,9 @@ class Reporter:
             result = h.result()
             # 디버깅: 개체의 X 확인
             for ind in h.pop:
+                print("F value:", ind.F)
+                if (ind.F <= 0).any():
+                    print("⚠️ 음수 또는 0이 있음:", ind.F)
                 print(f"[DEBUG] Generation {h.n_iter} - ind.X type: {type(ind.X)}")
 
                 val = ind.X
