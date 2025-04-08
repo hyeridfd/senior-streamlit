@@ -14,6 +14,8 @@ st.set_page_config(page_title="시니어 맞춤형 프리미엄 헬스케어 솔
 st.title("시니어 맞춤형 프리미엄 헬스케어 솔루션")
 st.caption("식단 최적화와 라이프스타일 코칭을 한 번에!")
 
+mode = st.session_state.get("mode", "🥗 개인 맞춤 식단 추천")
+
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
 
@@ -47,9 +49,6 @@ st.sidebar.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
-# 버튼 UI
-mode = st.session_state.get("mode", "🥗 개인 맞춤 식단 추천")
 
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
