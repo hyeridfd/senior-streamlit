@@ -81,6 +81,14 @@ st.markdown("""
         color: inherit !important;
         padding: 0 !important;
     }
+
+    span[style*="background-color: rgb(232, 244, 253)"] {
+        background-color: transparent !important;
+        border-radius: 0px !important;
+        padding: 0 !important;
+        color: inherit !important;
+        box-shadow: none !important;
+    }
     /* 폼 내부 간격 */
     .stForm > div {
         gap: 1rem;
