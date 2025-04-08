@@ -316,7 +316,6 @@ class Reporter:
         plt.xlabel("Function Evaluations")
         plt.ylabel(metric_name) 
         plt.yscale("log")
-        plt.plot(fitness_values)
         plt.legend()
         plt.tight_layout()
         plt.savefig(save_path, dpi=300)
