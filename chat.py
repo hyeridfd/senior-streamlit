@@ -83,7 +83,8 @@ render_sidebar_button("라이프스타일 코칭", "💬", "💬 라이프스타
 
 if st.session_state.get("mode"):
     st.session_state.mode = st.session_state["mode"]
-
+    
+mode = st.session_state.mode
 # ================================
 # 🥗 식단 최적화 모드
 # ================================
