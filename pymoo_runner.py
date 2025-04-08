@@ -118,9 +118,9 @@ def run_optimization_from_streamlit(conf):
         for gen_idx, h in enumerate(res.history):
             best_fitness = float('inf')
             best_ind = None
-            #st.markdown(f"### 📘 Generation {gen_idx + 1}")
-
+            print(f"\n📘 Generation {gen_idx + 1}")
             for i, ind in enumerate(h.pop):
+                print(f"  - 개체 {i}: F = {ind.F}")
                 val = ind.X
                 # val이 Solution 객체라면 바로 사용
                 if isinstance(val, Solution):
