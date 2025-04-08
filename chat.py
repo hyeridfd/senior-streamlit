@@ -12,52 +12,37 @@ from pymoo_runner import run_optimization_from_streamlit
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 프리미엄 헬스케어 솔루션", page_icon="🧓")
 
-st.markdown("""
+st.sidebar.markdown("""
     <style>
-    /* 전체 폰트 및 배경 */
-    html, body, [class*="css"] {
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: #f9fbfc;
-        color: #333333;
+    div.stButton > button {
+        padding: 1rem 1.5rem;
+        font-size: 22px;
+        font-weight: 600;
+        border-radius: 12px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease-in-out;
+        background-color: #f0f2f6;
+        border: 1px solid #d0d0d0;
+        color: #000000;
     }
 
-    /* 입력창 스타일 초기화 */
-    .stTextInput input, .stNumberInput input, .stSelectbox div {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        border-radius: 8px !important;
-        border: 1px solid #dcdcdc !important;
-        box-shadow: none !important;
+    div.stButton > button:hover {
+        background-color: #e3f2fd;
+        border: 1px solid #2196f3;
+        color: #0d47a1;
     }
 
-    /* selectbox 기본값도 깔끔하게 */
-    div[data-baseweb="select"] > div {
-        background-color: #ffffff !important;
-        border-radius: 8px !important;
-        border: 1px solid #dcdcdc !important;
-        color: #000000 !important;
+    /* 🔴 클릭 후 생기는 붉은 테두리 제거 */
+    div.stButton > button:focus {
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #d0d0d0;
     }
 
-    div[data-baseweb="select"] {
-        border-radius: 8px !important;
-    }
-
-    /* 선택된 label 둥글고 파란 배경 제거 */
-    span[data-baseweb="tag"],
-    span[style*="background-color: rgb(232, 244, 253)"],
-    span[style*="border-radius: 999em"],
-    span[style*="border-radius: 16px"],
-    mark {
-        background-color: transparent !important;
-        border-radius: 0px !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        color: inherit !important;
-    }
-
-    /* 폼 내부 간격 */
-    .stForm > div {
-        gap: 1rem;
+    .selected-button {
+        background-color: #1976d2 !important;
+        border: 1px solid #0d47a1 !important;
+        color: white !important;
     }
     </style>
 """, unsafe_allow_html=True)
