@@ -55,11 +55,11 @@ st.sidebar.markdown("무엇을 도와드릴까요?")
 is_diet_selected = st.session_state.mode == "🥗 개인 맞춤 식단 추천"
 is_life_selected = st.session_state.mode == "💬 라이프스타일 코칭"
 
-if st.sidebar.button("🥗 개인 맞춤 식단 추천", key="diet_button", use_container_width=True):
+if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"
     st.rerun()
 
-if st.sidebar.button("💬 라이프스타일 코칭", key="life_button", use_container_width=True):
+if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True):
     st.session_state.mode = "💬 라이프스타일 코칭"
     st.rerun()
     
