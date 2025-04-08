@@ -88,7 +88,7 @@ st.sidebar.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown('<h3 style="color:#007BFF;">모드 선택</h3>', unsafe_allow_html=True)
+st.sidebar.markdown('<div style="font-size:28px; color:blue; font-weight:bold;">모드 선택</div>', unsafe_allow_html=True)
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
 if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
