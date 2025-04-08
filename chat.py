@@ -58,7 +58,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown(
-    '<h3 style="color:#4f772d; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
+    '<h3 style="color:#226f54; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
     unsafe_allow_html=True
 )
 
@@ -99,7 +99,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown(
-    '<h3 style="color:#4f772d; font-size:28px; font-weight:bold; margin-bottom:10px;">모드 선택</h3>',
+    '<h3 style="color:#226f54; font-size:28px; font-weight:bold; margin-bottom:10px;">모드 선택</h3>',
     unsafe_allow_html=True
 )
 
