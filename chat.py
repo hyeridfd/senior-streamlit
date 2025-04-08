@@ -12,12 +12,12 @@ from pymoo_runner import run_optimization_from_streamlit
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page_icon="🧓")
 
-st.markdown("""
-    <div style="text-align: center;">
-        <img src="http://www.hyocook123.com/main/index.php" width="200"/>
-    </div>
-""", unsafe_allow_html=True)
+st.image("./logo.png", width=150)
 
+st.markdown(
+    '<h3 style="color:#226f54; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
+    unsafe_allow_html=True
+)
 
 st.sidebar.markdown("""
     <style>
@@ -63,11 +63,6 @@ st.sidebar.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
-st.markdown(
-    '<h3 style="color:#226f54; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
-    unsafe_allow_html=True
-)
 
 st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추천과 라이프스타일 코칭을 제공합니다.")
 
