@@ -59,43 +59,14 @@ st.markdown("""
         border-color: #0d47a1 !important;
     }
 
-    /* 입력창 스타일 */
-    .stTextInput input, .stNumberInput input, .stSelectbox div {
-        background-color: #f0f8ff !important;
-        color: #0d47a1 !important;
-        border-radius: 8px !important;
-    }
-    /* select 내부 스타일 */
-    div[data-baseweb="select"] > div {
+    /* 👉 입력창 스타일: 기본 회색 배경으로 돌림 */
+    .stTextInput input,
+    .stNumberInput input,
+    .stSelectbox div {
         background-color: white !important;
-        border-radius: 0px !important;
         color: black !important;
+        border-radius: 4px !important;
     }
-
-    div[data-baseweb="select"] {
-        border-radius: 0px !important;
-    }
-    /* label 위에 둥근 배경 없애기 (배경색 + 테두리 제거) */
-    span[style*="background-color: rgb(232, 244, 253)"],
-    span[style*="border-radius: 999em"],
-    span[style*="border-radius: 16px"],
-    mark {
-        background-color: transparent !important;
-        border-radius: 0px !important;
-        padding: 0 !important;
-        color: inherit !important;
-        box-shadow: none !important;
-    }
-    /* 태그 스타일도 제거 */
-    span[data-baseweb="tag"] {
-        background-color: transparent !important;
-        border-radius: 0px !important;
-        box-shadow: none !important;
-        padding: 0px !important;
-        color: #0d47a1 !important;
-        font-weight: 500 !important;
-    }
-
     /* 폼 내부 간격 */
     .stForm > div {
         gap: 1rem;
