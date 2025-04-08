@@ -308,7 +308,9 @@ class Reporter:
 
     def draw_metric_plot(self, algorithm, n_evals, result, title, metric_name, save_path):
         print(f"[CHECK] {metric_name} 최소값: {np.min(result)}")
-        print(f"[CHECK] {metric_name} 값들: {result}")
+        print(f"[DEBUG] result 타입: {type(result)}")
+        print(f"[DEBUG] 값들: {result}")
+        print(f"[DEBUG] 로그 조건 결과: {np.all(np.array(result) > 0)}")
         plt.clf()
         plt.plot(n_evals, result, color='black', lw=0.7, label=title)
         plt.scatter(n_evals, result, facecolor="none", edgecolor='black', marker="p")
@@ -317,7 +319,7 @@ class Reporter:
         plt.ylabel(metric_name) 
 
             # ⚠️ 로그 스케일 조건 검사
-        if all(v > 0 for v in result):
+        if np.all(np.array(result) > 0):
             plt.yscale("log")
         else:
             print(f"[WARNING] {metric_name} 값에 0 이하가 있어서 로그스케일 생략")
