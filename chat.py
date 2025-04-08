@@ -27,7 +27,7 @@ st.sidebar.markdown("""
 
     div.stButton > button {
         padding: 1rem 1.5rem;
-        font-size: 22px;
+        font-size: 30px;
         font-weight: 600;
         border-radius: 12px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
