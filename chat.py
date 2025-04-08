@@ -34,7 +34,7 @@ st.sidebar.markdown("""
     <style>
     div.stButton > button {
         padding: 1rem 1.5rem;
-        font-size: 22px;
+        font-size: 30px;
         font-weight: 600;
         border-radius: 12px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
@@ -51,6 +51,12 @@ st.sidebar.markdown("""
     }
 
     /* 클릭 후 선택된 버튼을 강조하고 싶다면 아래에 조건부 스타일 삽입 가능 */
+    div.stButton > button:focus {
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #d0d0d0;
+    }
+    
     .selected-button {
         background-color: #1976d2 !important;
         border: 1px solid #0d47a1 !important;
