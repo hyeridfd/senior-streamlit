@@ -316,7 +316,7 @@ class Reporter:
         plt.scatter(n_evals, result, facecolor="none", edgecolor='black', marker="p")
         plt.title("Convergence - {}".format(algorithm))
         plt.xlabel("Function Evaluations")
-        plt.ylabel(metric_name) 
+        plt.ylabel(metric_name, usetex=False)
 
             # ⚠️ 로그 스케일 조건 검사
         if np.all(np.array(result) > 0):
