@@ -15,7 +15,7 @@ st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page
 st.sidebar.markdown("""
     <style>
     section[data-testid="stSidebar"] {
-        background-color: #dec0f1 !important;
+        background-color: #ebd9fc !important;
     }
     
     div.stButton > button {
