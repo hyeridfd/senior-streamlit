@@ -15,47 +15,47 @@ st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page
 st.sidebar.markdown("""
     <style>
     section[data-testid="stSidebar"] {
-        background-color: #ebd9fc !important;
+        background-color: #f3e8ff !important; /* 연한 보라 배경 */
     }
-    
+
     div.stButton > button {
         padding: 1rem 1.5rem;
         font-size: 22px;
         font-weight: 600;
         border-radius: 12px;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease-in-out;
-        background-color: #f0f2f6;
-        border: 1px solid #d0d0d0;
-        color: #000000;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        background-color: #d6c4f8; /* 연보라 버튼 */
+        border: 1px solid #bba2f7;
+        color: #4b0082;
+        transition: all 0.3s ease;
     }
 
     div.stButton > button:hover {
-        background-color: #e3f2fd;
-        border: 1px solid #2196f3;
-        color: #0d47a1;
+        background-color: #eae2ff;
+        border-color: #a58ce8;
+        color: #5d3fd3;
     }
 
-    /* 🔴 클릭 후 생기는 붉은 테두리 제거 */
     div.stButton > button:focus {
         outline: none;
         box-shadow: none;
-        border: 1px solid #d0d0d0;
     }
 
     .selected-button {
-        background-color: #1976d2 !important;
-        border: 1px solid #0d47a1 !important;
+        background-color: #b695f8 !important;
+        border: 1px solid #9e76e0 !important;
         color: white !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
+
 st.markdown(
-    '<h3 style="color:#0466c8; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
+    '<h3 style="color:#6a0dad; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
     unsafe_allow_html=True
 )
-#st.title("시니어 맞춤형 헬스케어 솔루션")
+
 st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추천과 라이프스타일 코칭을 제공합니다.")
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
@@ -93,9 +93,10 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown(
-    '<h3 style="color:#af99ff; font-size:28px; font-weight:bold;">모드 선택</h3>',
+    '<h3 style="color:#7b4bb7; font-size:28px; font-weight:bold;">모드 선택</h3>',
     unsafe_allow_html=True
 )
+
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
 if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
