@@ -35,7 +35,7 @@ col2 = st.sidebar.button("💬 라이프스타일 코칭", use_container_width=T
 
 if col1:
     st.session_state.mode = "diet"
-    st.experimental_rerun()  # ✅ rerun 시켜야 즉시 반영됨
+    st.rerun()
 
 if col2:
     st.session_state.mode = "life"
@@ -43,7 +43,6 @@ if col2:
 
 # 현재 선택된 모드
 mode = st.session_state.mode
-st.sidebar.markdown(f"🟢 현재 모드: {'🥗 개인 맞춤 식단 추천' if mode == 'diet' else '💬 라이프스타일 코칭'}")
 
 # ================================
 # 🥗 식단 최적화 모드
