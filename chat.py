@@ -22,20 +22,24 @@ print("✅ openai version:", openai.__version__)
 # 세션 상태 초기화
 if 'message_list' not in st.session_state:
     st.session_state.message_list = []
+if 'mode' not in st.session_state:
+    st.session_state.mode = "diet"   
 
 # 🟡 모드 선택
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
-if 'mode' not in st.session_state:
-    st.session_state.mode = "diet"  # 기본값
-
 # 버튼을 위에서 아래로 배치
-if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
-    st.session_state.mode = "diet"
+col1 = st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True)
+col2 = st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
 
-if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True):
+if col1:
+    st.session_state.mode = "diet"
+    st.experimental_rerun()  # ✅ rerun 시켜야 즉시 반영됨
+
+if col2:
     st.session_state.mode = "life"
+    st.experimental_rerun()
 
 # 현재 선택된 모드
 mode = st.session_state.mode
