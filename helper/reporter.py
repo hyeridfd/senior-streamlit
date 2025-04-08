@@ -315,7 +315,7 @@ class Reporter:
         plt.title("Convergence - {}".format(algorithm))
         plt.xlabel("Function Evaluations")
         plt.ylabel(metric_name)
-        fitness_values = [ind.F for ind in result.pop]
+        fitness_values = result.F
         print("📉 로그스케일에 들어갈 F 값 리스트:", fitness_values)
         for f in fitness_values:
             if (f <= 0).any():
