@@ -119,7 +119,10 @@ if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
 
 if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
     st.subheader("👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요")
-    st.markdown("☑️ 아래 항목을 선택/입력해 주세요:")
+    st.markdown(
+    '<h3 style="color:#000000; font-size:20px; font-weight:bold;">☑️ 아래 항목을 선택/입력해 주세요:</h3>',
+    unsafe_allow_html=True
+)
 
     with st.form("diet_form"):
         col1, col2 = st.columns(2)
