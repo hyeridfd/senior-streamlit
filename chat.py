@@ -62,7 +62,7 @@ st.markdown("""
     /* 입력창 스타일 */
     .stTextInput input, .stNumberInput input, .stSelectbox div {
         background-color: #f0f8ff !important;
-        color: #FFDFEF !important;
+        color: #1976d2 !important;
         border-radius: 8px !important;
     }
 
