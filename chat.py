@@ -65,24 +65,28 @@ st.markdown("""
         color: #0d47a1 !important;
         border-radius: 8px !important;
     }
-    /* 👇 추가 부분 */
+    /* select 내부 스타일 */
     div[data-baseweb="select"] > div {
         background-color: white !important;
         border-radius: 0px !important;
         color: black !important;
     }
-    
+
     div[data-baseweb="select"] {
         border-radius: 0px !important;
     }
+    /* label 위에 둥근 배경 없애기 (배경색 + 테두리 제거) */
+    span[style*="background-color: rgb(232, 244, 253)"],
+    span[style*="border-radius: 999em"],
+    span[style*="border-radius: 16px"],
     mark {
         background-color: transparent !important;
         border-radius: 0px !important;
-        color: inherit !important;
         padding: 0 !important;
+        color: inherit !important;
+        box-shadow: none !important;
     }
-
-    /* selectbox label 위에 붙는 스타일 제거 */
+    /* 태그 스타일도 제거 */
     span[data-baseweb="tag"] {
         background-color: transparent !important;
         border-radius: 0px !important;
