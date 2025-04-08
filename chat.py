@@ -52,7 +52,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown(
-    '<h3 style="color:#007BFF; font-size:28px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
+    '<h3 style="color:#007BFF; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
     unsafe_allow_html=True
 )
 #st.title("시니어 맞춤형 헬스케어 솔루션")
