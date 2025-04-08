@@ -64,6 +64,11 @@ st.markdown(
 
 st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추천과 라이프스타일 코칭을 제공합니다.")
 
+st.markdown(
+    '<h3 style="color:#495057; font-size:28px; font-weight:bold;"👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요"</h3>',
+    unsafe_allow_html=True
+)
+
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
 
@@ -118,10 +123,10 @@ if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
 # ================================
 
 if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
-    st.markdown(
-    '<h3 style="color:#495057; font-size:28px; font-weight:bold;"👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요"</h3>',
-    unsafe_allow_html=True
-)
+#     st.markdown(
+#     '<h3 style="color:#495057; font-size:28px; font-weight:bold;"👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요"</h3>',
+#     unsafe_allow_html=True
+# )
 
     with st.form("diet_form"):
         col1, col2 = st.columns(2)
