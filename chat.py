@@ -29,15 +29,21 @@ if 'mode' not in st.session_state:
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
-# 버튼을 위에서 아래로 배치
-col1 = st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True)
-col2 = st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
+st.sidebar.markdown("""
+    <style>
+    div.stButton > button {
+        padding: 1rem 1rem;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-if col1:
+if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"
     st.rerun()
 
-if col2:
+if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True):
     st.session_state.mode = "💬 라이프스타일 코칭"
     st.rerun()
 
