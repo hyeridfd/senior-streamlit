@@ -73,6 +73,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+
 st.title("시니어 맞춤형 헬스케어 솔루션")
 st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추천과 라이프스타일 코칭을 제공합니다.")
 
