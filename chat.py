@@ -123,32 +123,6 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
             pa = st.selectbox("활동수준", ["낮음", "보통", "활동적"], index=2)
             waist = st.number_input("허리둘레 (cm)", min_value=50.0, max_value=150.0, value=85.0)
             chewing_stage = st.selectbox("저작 단계", ["1단계", "2단계", "3단계"], index=0)
-            
-             # ✅ 여기에 버튼 스타일 적용
-        st.markdown("""
-            <style>
-            form button {
-                background-color: #1976d2 !important;
-                color: white !important;
-                border: 1px solid #0d47a1 !important;
-                border-radius: 8px !important;
-                padding: 0.6rem 1.2rem !important;
-                font-size: 18px !important;
-                font-weight: 600 !important;
-            }
-    
-            form button:hover {
-                background-color: #1565c0 !important;
-                border-color: #0b3c91 !important;
-                color: white !important;
-            }
-    
-            form button:focus {
-                outline: none !important;
-                box-shadow: none !important;
-            }
-            </style>
-        """, unsafe_allow_html=True)
     
         submitted = st.form_submit_button("식단 최적화 실행")
 
