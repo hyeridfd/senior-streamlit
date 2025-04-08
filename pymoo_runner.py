@@ -30,6 +30,11 @@ import timeit
 from helper.config import Config
 from solution import Solution
 
+# 💡 matplotlib LaTeX 렌더링 오류 방지 설정
+import matplotlib as mpl
+mpl.rcParams['text.usetex'] = False
+mpl.rcParams['mathtext.default'] = 'regular'
+
 def get_algorithm(algorithm_name, number_of_population):
     evaluator = Evaluator(evaluate_values_of=["F", "G", "dF", "dG"])
 
