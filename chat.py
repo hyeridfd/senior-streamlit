@@ -21,7 +21,7 @@ st.sidebar.markdown("""
         border-radius: 12px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         transition: all 0.2s ease-in-out;
-        background-color: #f0f2f6;
+        background-color: #1976d2;
         border: 1px solid #d0d0d0;
         color: #000000;
     }
