@@ -14,6 +14,10 @@ st.set_page_config(page_title="시니어 맞춤형 프리미엄 헬스케어 솔
 
 st.sidebar.markdown("""
     <style>
+    section[data-testid="stSidebar"] {
+        background-color: #e3f2fd !important;
+    }
+    
     div.stButton > button {
         padding: 1rem 1.5rem;
         font-size: 22px;
@@ -21,7 +25,7 @@ st.sidebar.markdown("""
         border-radius: 12px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         transition: all 0.2s ease-in-out;
-        background-color: #1976d2;
+        background-color: #f0f2f6;
         border: 1px solid #d0d0d0;
         color: #000000;
     }
