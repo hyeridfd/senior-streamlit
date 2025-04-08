@@ -11,7 +11,7 @@ from pymoo_runner import run_optimization_from_streamlit
 
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 프리미엄 헬스케어 솔루션", page_icon="🧓")
-st.title("시니어 맞춤형 프리미엄 헬스케어 솔루션")
+st.title("시니어 맞춤형 헬스케어 솔루션")
 st.caption("식단 최적화와 라이프스타일 코칭을 한 번에!")
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
