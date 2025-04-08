@@ -10,7 +10,7 @@ from helper.config import Config
 from pymoo_runner import run_optimization_from_streamlit
 
 # 초기 설정
-st.set_page_config(page_title="시니어 맞춤형 프리미엄 헬스케어 솔루션", page_icon="🧓")
+st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page_icon="🧓")
 
 st.sidebar.markdown("""
     <style>
@@ -52,7 +52,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown(
-    '<h3 style="color:#007BFF; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
+    '<h3 style="color:#0466c8; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
     unsafe_allow_html=True
 )
 #st.title("시니어 맞춤형 헬스케어 솔루션")
@@ -93,7 +93,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown(
-    '<h3 style="color:#007BFF; font-size:28px; font-weight:bold;">모드 선택</h3>',
+    '<h3 style="color:#0466c8; font-size:28px; font-weight:bold;">모드 선택</h3>',
     unsafe_allow_html=True
 )
 st.sidebar.markdown("무엇을 도와드릴까요?")
