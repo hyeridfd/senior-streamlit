@@ -82,13 +82,16 @@ st.markdown("""
         padding: 0 !important;
     }
 
-    span[style*="background-color: rgb(232, 244, 253)"] {
+    /* selectbox label 위에 붙는 스타일 제거 */
+    span[data-baseweb="tag"] {
         background-color: transparent !important;
         border-radius: 0px !important;
-        padding: 0 !important;
-        color: inherit !important;
         box-shadow: none !important;
+        padding: 0px !important;
+        color: #0d47a1 !important;
+        font-weight: 500 !important;
     }
+
     /* 폼 내부 간격 */
     .stForm > div {
         gap: 1rem;
