@@ -12,6 +12,13 @@ from pymoo_runner import run_optimization_from_streamlit
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page_icon="🧓")
 
+st.markdown("""
+    <div style="text-align: center;">
+        <img src="http://www.hyocook123.com/main/index.php" width="200"/>
+    </div>
+""", unsafe_allow_html=True)
+
+
 st.sidebar.markdown("""
     <style>
     section[data-testid="stSidebar"] {
