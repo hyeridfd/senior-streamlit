@@ -127,7 +127,7 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
              # ✅ 여기에 버튼 스타일 적용
         st.markdown("""
             <style>
-            button[kind="primary"] {
+            form button {
                 background-color: #1976d2 !important;
                 color: white !important;
                 border: 1px solid #0d47a1 !important;
@@ -137,13 +137,13 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
                 font-weight: 600 !important;
             }
     
-            button[kind="primary"]:hover {
+            form button:hover {
                 background-color: #1565c0 !important;
                 border-color: #0b3c91 !important;
                 color: white !important;
             }
     
-            button[kind="primary"]:focus {
+            form button:focus {
                 outline: none !important;
                 box-shadow: none !important;
             }
