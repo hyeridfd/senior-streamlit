@@ -320,13 +320,9 @@ class Reporter:
         for ind in h.pop
         ]
         print("📉 로그스케일에 들어갈 F 값 리스트:", fitness_values)
-        
         for f in fitness_values:
-            if (f <= 0).any():
-                print("⚠️ 로그스케일 불가 F:", f)   
-        for f in fitness_values:
-        if f <= 0:
-            print("⚠️ 로그스케일 불가 F:", f)
+            if f <= 0:
+                print("⚠️ 로그스케일 불가 F:", f)
 
         if all(f > 0 for f in fitness_values):
             plt.yscale("log")
