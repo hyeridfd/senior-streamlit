@@ -27,7 +27,7 @@ st.sidebar.markdown("""
 
     div.stButton > button {
         padding: 1rem 1.5rem;
-        font-size: 100px;
+        font-size: 30px;
         font-weight: 600;
         border-radius: 12px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
@@ -35,6 +35,8 @@ st.sidebar.markdown("""
         background-color: #eaf291;
         border: 1px solid #d6d84c;
         color: #444;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease-in-out;
     }
 
     div.stButton > button:hover {
@@ -83,27 +85,6 @@ if 'message_list' not in st.session_state:
 # 세션 초기화
 if 'mode' not in st.session_state:
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"
-
-# CSS 스타일 삽입
-st.sidebar.markdown("""
-    <style>
-    .stButton > button {
-        padding: 1rem 1.5rem;
-        font-size: 30px;
-        font-weight: 600;
-        border-radius: 12px;
-        margin-bottom: 0.5rem;
-        width: 100%;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.2s ease-in-out;
-    }
-    .stButton > button:hover {
-        background-color: #e3f2fd;
-        border-color: #2196f3;
-        color: #0d47a1;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 st.sidebar.markdown(
     '<h3 style="color:#226f54; font-size:28px; font-weight:bold; margin-bottom:10px;">모드 선택</h3>',
