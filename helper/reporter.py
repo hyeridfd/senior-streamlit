@@ -315,21 +315,13 @@ class Reporter:
         plt.title("Convergence - {}".format(algorithm))
         plt.xlabel("Function Evaluations")
         plt.ylabel(metric_name)
-        fitness_values = [
-        ind.F[0] if isinstance(ind.F, np.ndarray) else ind.F
-        for ind in h.pop
-        ]
+        fitness_values = [ind.F for ind in result.pop]
         print("📉 로그스케일에 들어갈 F 값 리스트:", fitness_values)
         for f in fitness_values:
-            if f <= 0:
+            if (f <= 0).any():
                 print("⚠️ 로그스케일 불가 F:", f)
-
-        if all(f > 0 for f in fitness_values):
-            plt.yscale("log")
-        else:
-            print("❌ 음수 또는 0 값이 포함되어 있어 로그스케일 비활성화")
             
-        #plt.yscale("log")
+        plt.yscale("log")
         plt.plot(fitness_values)
         plt.legend()
         plt.tight_layout()
