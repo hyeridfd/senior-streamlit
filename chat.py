@@ -23,11 +23,6 @@ print("✅ openai version:", openai.__version__)
 if 'message_list' not in st.session_state:
     st.session_state.message_list = []
 
-if 'mode' not in st.session_state:
-    st.session_state.mode = "🥗 개인 맞춤 식단 추천"   
-
-import streamlit as st
-
 # 세션 초기화
 if 'mode' not in st.session_state:
     st.session_state.mode = "🥗 개인 맞춤 식단 추천"
@@ -35,54 +30,38 @@ if 'mode' not in st.session_state:
 # CSS 스타일 삽입
 st.sidebar.markdown("""
     <style>
-    .custom-button {
+    .stButton > button {
         padding: 1rem 1.5rem;
         font-size: 22px;
         font-weight: 600;
         border-radius: 12px;
         margin-bottom: 0.5rem;
         width: 100%;
-        border: 1px solid #d0d0d0;
-        color: #000000;
-        background-color: #f0f2f6;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         transition: all 0.2s ease-in-out;
     }
-    .custom-button:hover {
+    .stButton > button:hover {
         background-color: #e3f2fd;
         border-color: #2196f3;
         color: #0d47a1;
     }
-    .custom-button.selected {
-        background-color: #1976d2 !important;
-        border-color: #0d47a1 !important;
-        color: white !important;
-    }
-    .custom-button:focus {
-        outline: none;
-        box-shadow: none;
-    }
     </style>
 """, unsafe_allow_html=True)
-
-# HTML로 버튼 렌더링
-def render_sidebar_button(label, emoji, mode_key):
-    selected_class = "selected" if st.session_state.mode == mode_key else ""
-    button_html = f"""
-        <form action="" method="post">
-            <button class="custom-button {selected_class}" name="mode" type="submit" value="{mode_key}">{emoji} {label}</button>
-        </form>
-    """
-    st.sidebar.markdown(button_html, unsafe_allow_html=True)
 
 # 버튼 UI
 st.sidebar.title("모드 선택")
 st.sidebar.markdown("무엇을 도와드릴까요?")
-render_sidebar_button("개인 맞춤 식단 추천", "🥗", "🥗 개인 맞춤 식단 추천")
-render_sidebar_button("라이프스타일 코칭", "💬", "💬 라이프스타일 코칭")
 
-if st.session_state.get("mode"):
-    st.session_state.mode = st.session_state["mode"]
+is_diet_selected = st.session_state.mode == "🥗 개인 맞춤 식단 추천"
+is_life_selected = st.session_state.mode == "💬 라이프스타일 코칭"
+
+if st.sidebar.button("🥗 개인 맞춤 식단 추천", key="diet_button", use_container_width=True):
+    st.session_state.mode = "🥗 개인 맞춤 식단 추천"
+    st.rerun()
+
+if st.sidebar.button("💬 라이프스타일 코칭", key="life_button", use_container_width=True):
+    st.session_state.mode = "💬 라이프스타일 코칭"
+    st.rerun()
     
 mode = st.session_state.mode
 # ================================
