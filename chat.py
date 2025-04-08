@@ -88,7 +88,7 @@ st.sidebar.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.sidebar.title("모드 선택")
+st.sidebar.markdown('<h3 style="color:#007BFF;">모드 선택</h3>', unsafe_allow_html=True)
 st.sidebar.markdown("무엇을 도와드릴까요?")
 
 if st.sidebar.button("🥗 개인 맞춤 식단 추천", use_container_width=True):
@@ -104,8 +104,8 @@ if st.sidebar.button("💬 라이프스타일 코칭", use_container_width=True)
 # ================================
 
 if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
-    st.subheader("👩‍⚕️ 개인 정보를 입력해 주세요")
-    st.markdown("아래 항목을 선택/입력해 주세요:")
+    st.subheader("👩🏻‍⚕️ 맞춤 식단 추천을 위해 필요한 정보를 입력해 주세요")
+    st.markdown("☑️ 아래 항목을 선택/입력해 주세요:")
 
     with st.form("diet_form"):
         col1, col2 = st.columns(2)
