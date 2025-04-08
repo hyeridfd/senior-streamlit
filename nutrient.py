@@ -82,8 +82,8 @@ def get_lunch_nutrient_profile(sex, age, weight, height, pa, waist, preference, 
         f"- 에너지: {lunch_kcal_range[0]:.0f}~{lunch_kcal_range[1]:.0f} kcal\n"
         f"- 탄수화물: {lunch_carbs[0]:.0f}~{lunch_carbs[1]:.0f} g\n"
         f"- 단백질: {lunch_protein[0]:.0f}~{lunch_protein[1]:.0f} g\n"
-        f"- 지방: {lunch_fat[0]:.0f}~{lunch_fat[1]:.0f} g"
-        f"- 식재료 선호도: {preference}"
+        f"- 지방: {lunch_fat[0]:.0f}~{lunch_fat[1]:.0f} g\n"
+        f"- 식재료 선호도: {preference}\n"
         f"- 저작단계: {chewing_stage_value}"
     )
     return profile
