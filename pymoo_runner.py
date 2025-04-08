@@ -198,14 +198,14 @@ def run_optimization_from_streamlit(conf):
 
         # 열 정렬 및 이름 변경
         preview_df = merged_df[["Day", "meal_name", "energy", "cho", "protein", "fat", "chewing_stage", "preference"]].rename(columns={
-            "Day": "🗓️ 날짜",
-            "meal_name": "🍱 음식명",
-            "energy": "🔥 열량 (kcal)",
-            "cho": "🍚 탄수화물 (g)",
-            "protein": "🥩 단백질 (g)",
-            "fat": "🫒 지방 (g)",
-            "chewing_stage": "👄 저작단계",
-            "preference": "🍽️ 선호도"
+            "Day": "날짜",
+            "meal_name": "음식명",
+            "energy": "열량 (kcal)",
+            "cho": "탄수화물 (g)",
+            "protein": "단백질 (g)",
+            "fat": "지방 (g)",
+            "chewing_stage": "저작단계",
+            "preference": "선호도"
         })
 
         # 표 출력
