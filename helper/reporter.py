@@ -42,8 +42,11 @@ class Reporter:
         experiment_id = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S").replace(" ", "").replace(":", "")
         self.experiment_id = experiment_id + "-" + config.EXPERIMENT_NAME
         self.file_path = "%s/%s/%s.csv" % (config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id)
-        self.pymoo_file_path = "%s/%s/%s_pymoo.csv" % (
-            config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id)
+        # self.pymoo_file_path = "%s/%s/%s_pymoo.csv" % (
+        #     config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.pymoo_file_path = os.path.join(base_dir, "Outputs", config.CSV_FOLDER_NAME, f"{self.experiment_id}_pymoo.csv")
+
         self.mat_file_path = "%s/%s" % (config.OUTPUTS_FOLDER_NAME, self.experiment_id)
 
         self.html_file_path = "%s/%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.HTML_FOLDER_NAME, self.experiment_id)
@@ -74,8 +77,9 @@ class Reporter:
         if not os.path.exists("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.HTML_FOLDER_NAME)):
             os.makedirs("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.HTML_FOLDER_NAME))
 
-        if not os.path.exists("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME)):
-            os.makedirs("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME))
+        # if not os.path.exists("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME)):
+        #     os.makedirs("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME))
+        os.makedirs(os.path.join("Outputs", config.CSV_FOLDER_NAME), exist_ok=True)
         if not os.path.exists("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.FIG_FOLDER_NAME)):
             os.makedirs("%s/%s" % (config.OUTPUTS_FOLDER_NAME, config.FIG_FOLDER_NAME))
 
@@ -163,10 +167,13 @@ class Reporter:
             float_format.format(protein), float_format.format(fat),
             time, *values)
 
+        try:
+            with open(self.pymoo_file_path, 'a') as saveRes:
+                saveRes.write(csv_text)
+                print(f"[DEBUG ✅] CSV 파일 작성 완료: {self.pymoo_file_path}")
+        except Exception as e:
+            print(f"[❌ ERROR] CSV 저장 실패: {e}")
 
-        with open(self.pymoo_file_path, 'a') as saveRes:
-            saveRes.write(csv_text)
-            saveRes.close()
 
     def highlight_max(self, x, color):
         return np.where(x > np.nanmax(x.to_numpy()), f"color: {color};", None)
