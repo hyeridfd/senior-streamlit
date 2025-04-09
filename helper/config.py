@@ -91,7 +91,7 @@ class Config:
                     'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.5),
                     'fat': (self.FAT * 0.9, self.FAT * 1.5),
                     'cho': (self.CHO * 0.9, self.CHO * 1.5)
-            }), 'weight': 1.0
+            }, strict=True), 'weight': 1.0
             },
             {
                 'function': ChewingStageFitness(self.CHEWING_STAGE),
@@ -159,7 +159,7 @@ class Config:
 # #from fitnesses.consistency_fitness import ConsistencyFitness
 # #from fitnesses.main_ingredient_fitness import MainIngredientFitness
 # #from fitnesses.meal_group_fitness import MealGroupFitness
-# from fitnesses.nutrient_fitness import NutrientFitness
+# from fitnesses.nutrient_fitness import 
 # #from fitnesses.repetition_fitness import RepetitionFitness
 
 
@@ -212,12 +212,12 @@ class Config:
 #         self.NUMBER_OF_DAYS = int(config['MENU']['NumberOfDays'])
 #         self.DISH_TYPE_SIZE = int(config['MENU']['DishTypeSize'])
 #         self.TOLERANCE = 33
-#         self.FITNESS_FUNCTIONS = [{'function': NutrientFitness(), 'weight': 1}]
+#         self.FITNESS_FUNCTIONS = [{'function': (), 'weight': 1}]
 
 #            # {'function': ColorFitness(), 'weight': 0.20},
 #            # {'function': ConsistencyFitness(), 'weight': 0.20},
 #           #  {'function': MainIngredientFitness(), 'weight': 0.20},
-#           #  {'function': NutrientFitness(), 'weight': 0.20},
+#           #  {'function': (), 'weight': 0.20},
 #           #  {'function': RepetitionFitness(), 'weight': 0.20},
 #           #  {'function': MealGroupFitness(), 'weight': 0.20},
 #         #]
