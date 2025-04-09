@@ -44,8 +44,10 @@ class Reporter:
         self.file_path = "%s/%s/%s.csv" % (config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id)
         # self.pymoo_file_path = "%s/%s/%s_pymoo.csv" % (
         #     config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id)
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.pymoo_file_path = os.path.join(base_dir, "Outputs", config.CSV_FOLDER_NAME, f"{self.experiment_id}_pymoo.csv")
+        
+        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # 프로젝트 루트
+        self.file_path = os.path.join(base_path, config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id + ".csv")
+        self.pymoo_file_path = os.path.join(base_path, config.OUTPUTS_FOLDER_NAME, config.CSV_FOLDER_NAME, self.experiment_id + "_pymoo.csv")
 
         self.mat_file_path = "%s/%s" % (config.OUTPUTS_FOLDER_NAME, self.experiment_id)
 
