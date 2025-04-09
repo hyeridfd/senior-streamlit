@@ -191,6 +191,16 @@ def run_optimization_from_streamlit(conf):
         st.write("📂 폴더 존재 여부:", os.path.exists(os.path.dirname(reporter.pymoo_file_path)))
         st.write("📄 파일 존재 여부:", os.path.exists(reporter.pymoo_file_path))
 
+        # ✅ 여기 추가하면 됩니다!
+        if os.path.exists(reporter.pymoo_file_path):
+            with open(reporter.pymoo_file_path, "rb") as f:
+                st.download_button(
+                    label="📥 최적화 결과 CSV 다운로드",
+                    data=f,
+                    file_name=os.path.basename(reporter.pymoo_file_path),
+                    mime="text/csv"
+                )
+
         # ✅ 전체 5일치 식단표를 표로 출력
         all_days_data = []
         for day_idx, day in enumerate(best_sol.days):
@@ -281,5 +291,4 @@ def run_optimization_from_streamlit(conf):
 
         plt.tight_layout()
         st.pyplot(fig)
-        print("✅ reporter.pymoo_file_path:", reporter.pymoo_file_path)
 
