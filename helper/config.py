@@ -91,7 +91,7 @@ class Config:
                     'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.5),
                     'fat': (self.FAT * 0.9, self.FAT * 1.5),
                     'cho': (self.CHO * 0.9, self.CHO * 1.5)
-            }, strict=True), 'weight': 1.0
+            }), 'weight': 1.0
             },
             {
                 'function': ChewingStageFitness(self.CHEWING_STAGE),
