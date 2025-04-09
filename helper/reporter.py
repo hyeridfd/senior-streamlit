@@ -399,7 +399,7 @@ class Reporter:
             fat = 0
             for idx, day in enumerate(best_sol.days):
                 energy += day.dish_types[constants.ENERGY_INDEX].sum()
-                cho += day.dish_types._get_column_array(constants.CHO_INDEX).sum()
+                cho += day.dish_types[constants.CHO_INDEX].sum()
                 protein += day.dish_types[constants.PROTEIN_INDEX].sum()
                 fat += day.dish_types[constants.FAT_INDEX].sum()
             energy = energy / best_sol.days.__len__()
