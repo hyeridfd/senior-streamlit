@@ -275,4 +275,5 @@ def run_optimization_from_streamlit(conf):
 
         plt.tight_layout()
         st.pyplot(fig)
-        st.write("CSV 저장 위치:", reporter.pymoo_file_path)
+        print("✅ reporter.pymoo_file_path:", reporter.pymoo_file_path)
+
