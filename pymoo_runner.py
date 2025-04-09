@@ -90,6 +90,20 @@ def get_algorithm(algorithm_name, number_of_population):
 
 
 def run_optimization_from_streamlit(conf):
+    # ✅ rerun 대비: 기존 결과 있으면 불러오기
+    if "best_solution" in st.session_state and "csv_path" in st.session_state:
+        best_sol = st.session_state["best_solution"]
+        csv_path = st.session_state["csv_path"]
+
+        st.markdown("## ✅ 이전 최적화 결과 불러오기")
+        with open(csv_path, "rb") as f:
+            st.download_button(
+                label="📥 최적화 결과 CSV 다운로드",
+                data=f,
+                file_name=os.path.basename(csv_path),
+                mime="text/csv"
+            )
+    return
     print("\U0001F4E6 받은 Config 객체 속성들:", conf.__dict__)
     problem = MenuPlanningProblem(argv=[], external_conf=conf)
     algorithm = get_algorithm(conf.ALGORITHM, conf.NUMBER_OF_POPULATION)
@@ -186,20 +200,14 @@ def run_optimization_from_streamlit(conf):
         reporter.show_and_save_plot(problem, res, run, algorithm.__class__.__name__)
         reporter.show_and_save_metric_plots(res, algorithm.__class__.__name__, run)
         
+        # ✅ rerun에도 결과 유지
+        st.session_state["best_solution"] = best_sol
+        st.session_state["csv_path"] = reporter.pymoo_file_path
+        
         # ✅ 여기 바로 아래에 디버깅 코드 삽입
         st.write("📍 파일 경로:", reporter.pymoo_file_path)
         st.write("📂 폴더 존재 여부:", os.path.exists(os.path.dirname(reporter.pymoo_file_path)))
         st.write("📄 파일 존재 여부:", os.path.exists(reporter.pymoo_file_path))
-
-        # ✅ 여기 추가하면 됩니다!
-        if os.path.exists(reporter.pymoo_file_path):
-            with open(reporter.pymoo_file_path, "rb") as f:
-                st.download_button(
-                    label="📥 최적화 결과 CSV 다운로드",
-                    data=f,
-                    file_name=os.path.basename(reporter.pymoo_file_path),
-                    mime="text/csv"
-                )
 
         # ✅ 전체 5일치 식단표를 표로 출력
         all_days_data = []
