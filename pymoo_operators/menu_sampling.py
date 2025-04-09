@@ -40,7 +40,7 @@ class MenuSampling(Sampling):
                     days.append(Day(dish_types))
     
                 sol = Solution(days, fitness_functions=copy.deepcopy(problem.fitness_functions))
-                if self.is_within_nutrient_bounds(sol, problem.config.NUTRIENT_BOUNDS):
+                if self.is_within_nutrient_bounds(sol, problem.conf.NUTRIENT_BOUNDS):
                     print("[SAMPLE ✅] 기준 만족 식단 생성됨")
                     return sol
                 else:
@@ -60,6 +60,7 @@ class MenuSampling(Sampling):
             idx = nutrient_index_map[nutrient]
             total = sum([day.dish_types[idx].sum() for day in sol.days])
             if not (min_val * 5 <= total <= max_val * 5):
+                print(f"[DEBUG] ❌ {nutrient} 범위 초과: {total:.2f} / 기준: {min_val*5:.2f}~{max_val*5:.2f}")
                 return False
         return True
 
