@@ -184,6 +184,11 @@ def run_optimization_from_streamlit(conf):
         reporter.history_writer(run, res, algorithm.__class__.__name__, stop - start)
         reporter.show_and_save_plot(problem, res, run, algorithm.__class__.__name__)
         reporter.show_and_save_metric_plots(res, algorithm.__class__.__name__, run)
+        
+        # ✅ 여기 바로 아래에 디버깅 코드 삽입
+        st.write("📍 파일 경로:", reporter.pymoo_file_path)
+        st.write("📂 폴더 존재 여부:", os.path.exists(os.path.dirname(reporter.pymoo_file_path)))
+        st.write("📄 파일 존재 여부:", os.path.exists(reporter.pymoo_file_path))
 
         # ✅ 전체 5일치 식단표를 표로 출력
         all_days_data = []
