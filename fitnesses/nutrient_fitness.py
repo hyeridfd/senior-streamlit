@@ -40,6 +40,7 @@ class NutrientFitness(AbstractFitness):
                 index = nutrient_index_map[nutrient]
                 value = day.dish_types[index]
                 score = self.calculate_difference(value, bounds)
+                print(f"[DEBUG] {nutrient} - 값: {np.sum(value)}, 점수: {score}")
                 daily_scores.append(score)
 
             # 하루 평균 점수
