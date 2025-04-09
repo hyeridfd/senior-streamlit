@@ -347,6 +347,9 @@ class Reporter:
         calculator = MetricCalculator()
         float_format = '{:.2f}'
         float_format_percent = '%{:.2f}'
+        if not os.path.exists(self.pymoo_file_path) or os.path.getsize(self.pymoo_file_path) == 0:
+            self.write_pymoo_header()
+            
         for h in res.history:
             result = h.result()
             # 디버깅: 개체의 X 확인
