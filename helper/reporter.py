@@ -222,7 +222,7 @@ class Reporter:
         for idx, day in enumerate(solution.days):
             meal = day.dish_types[constants.FOOD_INDEX]
             energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
-           #cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
+            cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
             protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
             fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
 
@@ -230,8 +230,8 @@ class Reporter:
                     'Menu': '\\n'.join(meal),
                     'Energy': float_format.format(energy),
                     'P_Energy': float_format_percent.format((energy / self.config.ENERGY) * 100),
-                    #Cho': float_format.format(cho),
-                   #'P_Cho': float_format_percent.format((cho / self.config.CHO) * 100),
+                    'Cho': float_format.format(cho),
+                    'P_Cho': float_format_percent.format((cho / self.config.CHO) * 100),
                     'Protein': float_format.format(protein),
                     'P_Protein': float_format_percent.format((protein / self.config.PROTEIN) * 100),
                     'Fat': float_format.format(fat),
@@ -394,16 +394,16 @@ class Reporter:
             igd = calculator.calculate_igd(result)
             igd_p = calculator.calculate_igd_p(result)
             energy = 0
-           #cho = 0
+            cho = 0
             protein = 0
             fat = 0
             for idx, day in enumerate(best_sol.days):
                 energy += day.dish_types[constants.ENERGY_INDEX].sum()
-               #cho += day.dish_types._get_column_array(constants.CHO_INDEX).sum()
+                cho += day.dish_types._get_column_array(constants.CHO_INDEX).sum()
                 protein += day.dish_types[constants.PROTEIN_INDEX].sum()
                 fat += day.dish_types[constants.FAT_INDEX].sum()
             energy = energy / best_sol.days.__len__()
-            #ho = cho / best_sol.days.__len__()
+            cho = cho / best_sol.days.__len__()
             protein = protein / best_sol.days.__len__()
             fat = fat / best_sol.days.__len__()
 
@@ -443,15 +443,15 @@ class Reporter:
         for idx, day in enumerate(solution.days):
             meal = day.dish_types[constants.FOOD_INDEX]
             energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
-           #cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
+            cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
             protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
             fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
             data = {'day': idx + 1,
                     'menu': [str(m) for m in meal],
                     'energy': float_format.format(energy),
                     'p_energy': float_format_percent.format(energy / self.config.ENERGY * 100),
-                   #'cho': float_format.format(cho),
-                   #'p_cho': float_format_percent.format(cho / self.config.CHO * 100),
+                    'cho': float_format.format(cho),
+                    'p_cho': float_format_percent.format(cho / self.config.CHO * 100),
                     'protein': float_format.format(protein),
                     'p_protein': float_format_percent.format(protein / self.config.PROTEIN * 100),
                     'fat': float_format.format(fat),
@@ -464,7 +464,7 @@ class Reporter:
             'fitnesses': fitness_dict,
             'config': {
                 'energy': self.config.ENERGY,
-               #'cho': self.config.CHO,
+                'cho': self.config.CHO,
                 'protein': self.config.PROTEIN,
                 'fat': self.config.FAT,
                 'tolerance': self.config.TOLERANCE,
