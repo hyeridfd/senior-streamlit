@@ -110,13 +110,13 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
         col1, col2 = st.columns(2)
 
         with col1:
-            age = st.number_input("나이", min_value=0, max_value=120, value=70)
-            sex = st.selectbox("성별", ["여성", "남성"])
-            height = st.number_input("키 (m)", min_value=1.0, max_value=3.0, value=1.6)
+            age = st.number_input("나이", min_value=0, max_value=120, value=67)
+            sex = st.selectbox("성별", ["남성", "여성"])
+            height = st.number_input("키 (m)", min_value=1.0, max_value=3.0, value=1.7)
             preference = st.selectbox("선호 식재료", ["육류", "수산물", "채소", "기타"])
 
         with col2:
-            weight = st.number_input("체중 (kg)", min_value=20.0, max_value=200.0, value=60.0)
+            weight = st.number_input("체중 (kg)", min_value=20.0, max_value=200.0, value=75.0)
             pa = st.selectbox("활동수준", ["낮음", "보통", "활동적"], index=2)
             waist = st.number_input("허리둘레 (cm)", min_value=50.0, max_value=150.0, value=85.0)
             chewing_stage = st.selectbox("저작 단계", ["1단계", "2단계", "3단계"], index=0)
