@@ -26,7 +26,7 @@ class MenuSampling(Sampling):
             return X
         
     def generate_solution(self, problem):
-            max_attempts = 20
+            max_attempts = 50
             for _ in range(max_attempts):
                 days = []
                 for i in range(5):
