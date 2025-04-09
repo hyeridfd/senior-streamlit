@@ -222,7 +222,7 @@ class Reporter:
         for idx, day in enumerate(solution.days):
             meal = day.dish_types[constants.FOOD_INDEX]
             energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
-            cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
+            cho = np.round(day.dish_types[constants.CHO_INDEX].sum(), 4)
             protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
             fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
 
@@ -409,7 +409,7 @@ class Reporter:
 
             self.write_pymoo_row(algorithm, run, h.n_iter, h.evaluator.n_eval, best_sol.fitness_functions,
                      best_sol.total_fitness,
-                     hyp, gd, gd_p, igd, igd_p, energy, 0, protein, fat, time)
+                     hyp, gd, gd_p, igd, igd_p, energy, cho, protein, fat, time)
 
 
     def conv_plot(self, algorithm, n_evals, opt, run):
