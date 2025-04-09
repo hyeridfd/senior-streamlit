@@ -15,18 +15,18 @@ class NutrientFitness(AbstractFitness):
 
     def calculate_difference(self, current, bounds):
         min_val, max_val = bounds
-        sum_of_ing = np.sum(current)
-        if min_val <= sum_of_ing <= max_val:
+        total = np.sum(current)
+
+        # ✅ 범위 안이면 1점, 아니면 0점
+        if min_val <= total <= max_val:
             return 1
         else:
-            # 선형 감점 방식
-            if sum_of_ing < min_val:
-                percent_diff = (min_val - sum_of_ing) / min_val
-            else:
-                percent_diff = (sum_of_ing - max_val) / max_val
-            return max(0, 1 - percent_diff * 2)
+            return 0
 
     def fitness(self, individual):
+        total_score = 0
+        num_days = len(individual.days)
+
         nutrient_index_map = {
             "kcal": constants.ENERGY_INDEX,
             "cho": constants.CHO_INDEX,
@@ -34,7 +34,6 @@ class NutrientFitness(AbstractFitness):
             "fat": constants.FAT_INDEX
         }
 
-        total_score = 0
         for day in individual.days:
             daily_scores = []
             for nutrient, bounds in self.bounds.items():
@@ -42,9 +41,12 @@ class NutrientFitness(AbstractFitness):
                 value = day.dish_types[index]
                 score = self.calculate_difference(value, bounds)
                 daily_scores.append(score)
+
+            # 하루 평균 점수
             total_score += sum(daily_scores) / len(daily_scores)
 
-        return 1 - (total_score / len(individual.days))
+        # 전체 평균 → fitness 점수는 낮을수록 좋음 (0에 가까울수록 완벽)
+        return 1 - (total_score / num_days)
         
     # def calculate_difference(self, current, target):
     #     tolerance = 0.05
