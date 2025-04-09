@@ -186,9 +186,9 @@ def run_optimization_from_streamlit(conf):
         reporter.show_and_save_plot(problem, res, run, algorithm.__class__.__name__)
         reporter.show_and_save_metric_plots(res, algorithm.__class__.__name__, run)
         
-        st.write("📍 파일 경로:", reporter.pymoo_file_path)
-        st.write("📂 폴더 존재 여부:", os.path.exists(os.path.dirname(reporter.pymoo_file_path)))
-        st.write("📄 파일 존재 여부:", os.path.exists(reporter.pymoo_file_path))
+        # st.write("📍 파일 경로:", reporter.pymoo_file_path)
+        # st.write("📂 폴더 존재 여부:", os.path.exists(os.path.dirname(reporter.pymoo_file_path)))
+        # st.write("📄 파일 존재 여부:", os.path.exists(reporter.pymoo_file_path))
 
         if os.path.exists(reporter.pymoo_file_path):
             with open(reporter.pymoo_file_path, "rb") as f:
@@ -249,7 +249,7 @@ def run_optimization_from_streamlit(conf):
             st.write(f"**Day {day_idx+1} 총 영양소:** 열량 {day_energy:.2f} kcal, 탄수화물 {day_cho:.2f}g, 단백질 {day_protein:.2f}g, 지방 {day_fat:.2f}g")
 
         # ✅ 하루별 영양소 섭취량 계산
-        st.markdown("## 📊 일별 영양소 섭취량")
+        st.markdown("## 📊 영양소 섭취량")
         daily_nutrients = {"Day": [], "Energy": [], "Cho": [], "Protein": [], "Fat": []}
         for day_idx, day in enumerate(best_sol.days):
             energy = day.dish_types["energy"].sum()
