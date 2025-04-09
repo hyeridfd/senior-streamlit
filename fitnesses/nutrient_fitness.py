@@ -10,18 +10,14 @@ from fitnesses.abstract_fitness import AbstractFitness
 #             for key, val in nutrient_bounds.items()
 #         }
 class NutrientFitness(AbstractFitness):
-    def __init__(self, nutrient_bounds):
+    def __init__(self, nutrient_bounds, strict=False):
         self.bounds = nutrient_bounds
+        self.strict = strict
 
     def calculate_difference(self, current, bounds):
         min_val, max_val = bounds
         total = np.sum(current)
-
-        # ✅ 범위 안이면 1점, 아니면 0점
-        if min_val <= total <= max_val:
-            return 1
-        else:
-            return 0
+        return 1 if min_val <= total <= max_val else 0
 
     def fitness(self, individual):
         total_score = 0
@@ -34,17 +30,23 @@ class NutrientFitness(AbstractFitness):
             "fat": constants.FAT_INDEX
         }
 
-        for day in individual.days:
+        for day_idx, day in enumerate(individual.days):
             daily_scores = []
             for nutrient, bounds in self.bounds.items():
                 index = nutrient_index_map[nutrient]
                 value = day.dish_types[index]
                 score = self.calculate_difference(value, bounds)
-                print(f"[DEBUG] {nutrient} - 값: {np.sum(value)}, 점수: {score}")
+                print(f"[DEBUG] {nutrient.upper()} ▶️ Day {day_idx+1} | 총합: {np.sum(value):.2f}, 기준: {bounds}, 점수: {score}")
                 daily_scores.append(score)
 
             # 하루 평균 점수
-            total_score += sum(daily_scores) / len(daily_scores)
+            daily_avg += sum(daily_scores) / len(daily_scores)
+        
+            if self.strict and daily_avg < 1.0:
+                print(f"[STRICT MODE] Day {day_idx+1} 불합격 처리")
+                return 1.0  # 최악의 fitness
+                
+            total_score += daily_avg
 
         # 전체 평균 → fitness 점수는 낮을수록 좋음 (0에 가까울수록 완벽)
         return 1 - (total_score / num_days)
