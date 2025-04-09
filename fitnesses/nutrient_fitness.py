@@ -40,7 +40,7 @@ class NutrientFitness(AbstractFitness):
                 daily_scores.append(score)
 
             # 하루 평균 점수
-            daily_avg += sum(daily_scores) / len(daily_scores)
+             daily_avg = sum(daily_scores) / len(daily_scores)
         
             if self.strict and daily_avg < 1.0:
                 print(f"[STRICT MODE] Day {day_idx+1} 불합격 처리")
