@@ -10,12 +10,12 @@ from helper.config import Config
 from pymoo_runner import run_optimization_from_streamlit
 
 # 초기 설정
-st.set_page_config(page_title="시니어 맞춤형 헬스케어 솔루션", page_icon="🧓")
+st.set_page_config(page_title="시니어 맞춤형 푸드 솔루션", page_icon="🧓")
 
 st.image("./logo.png", width=150)
 
 st.markdown(
-    '<h3 style="color:#226f54; font-size:38px; font-weight:bold;">시니어 맞춤형 헬스케어 솔루션</h3>',
+    '<h3 style="color:#226f54; font-size:38px; font-weight:bold;">시니어 맞춤형 푸드 솔루션</h3>',
     unsafe_allow_html=True
 )
 
