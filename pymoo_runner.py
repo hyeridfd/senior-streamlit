@@ -28,6 +28,7 @@ from pymoo_operators.menu_planning_problem import MenuPlanningProblem
 from pymoo_operators.pymoomutation import PymooMutation
 from pymoo_operators.menu_sampling import MenuSampling
 import timeit
+import uuid
 from helper.config import Config
 from solution import Solution
 
@@ -192,12 +193,13 @@ def run_optimization_from_streamlit(conf):
 
         if os.path.exists(reporter.pymoo_file_path):
             with open(reporter.pymoo_file_path, "rb") as f:
+                unique_key = f"download_result_{uuid.uuid4()}"
                 st.download_button(
                     label="📥 결과 CSV 다운로드",
                     data=f,
                     file_name=os.path.basename(reporter.pymoo_file_path),
                     mime="text/csv",
-                    key="download_current_result_{run}"
+                    key=unique_key 
                 )
 
         # ✅ 전체 5일치 식단표를 표로 출력
