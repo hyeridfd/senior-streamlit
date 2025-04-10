@@ -197,7 +197,7 @@ def run_optimization_from_streamlit(conf):
                     data=f,
                     file_name=os.path.basename(reporter.pymoo_file_path),
                     mime="text/csv",
-                    key="download_current_result"
+                    key="download_current_result_{run}"
                 )
 
         # ✅ 전체 5일치 식단표를 표로 출력
