@@ -193,7 +193,7 @@ def run_optimization_from_streamlit(conf):
         if os.path.exists(reporter.pymoo_file_path):
             with open(reporter.pymoo_file_path, "rb") as f:
                 st.download_button(
-                    label="📥 최적화 결과 CSV 다운로드",
+                    label="📥 결과 CSV 다운로드",
                     data=f,
                     file_name=os.path.basename(reporter.pymoo_file_path),
                     mime="text/csv",
@@ -224,7 +224,7 @@ def run_optimization_from_streamlit(conf):
         })
 
         # 표 출력
-        st.markdown("## 🍴 최적화된 5일치 식단표")
+        st.markdown("## 🍴 개인 맞춤 식단표")
         st.dataframe(preview_df, use_container_width=True)
         st.markdown(f"### 🎯 총 적합도 점수: **{best_sol.total_fitness:.4f}**")
 
