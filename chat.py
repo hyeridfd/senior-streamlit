@@ -121,7 +121,7 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
             waist = st.number_input("허리둘레 (cm)", min_value=50.0, max_value=150.0, value=85.0)
             chewing_stage = st.selectbox("저작 단계", ["1단계", "2단계", "3단계"], index=0)
     
-        submitted = st.form_submit_button("식단 최적화 실행")
+        submitted = st.form_submit_button("식단 설계 실행")
 
 
     if submitted:
@@ -152,7 +152,7 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
             }
             conf = Config(argv=[], external_targets=external_targets)
 
-            st.info("⏳ 식단 최적화 진행 중입니다...")
+            st.info("⏳ 식단 설계 진행 중입니다...")
             best_solution = run_optimization_from_streamlit(conf)
 
         except Exception as e:
@@ -214,7 +214,7 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
 #             }
 #             conf = Config(argv=[], external_targets=external_targets)
 
-#             st.info("⏳ 식단 최적화 진행 중입니다...")
+#             st.info("⏳ 식단 설계 진행 중입니다...")
 #             best_solution = run_optimization_from_streamlit(conf)
 
 #         #     # 3. 결과 출력
