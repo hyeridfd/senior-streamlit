@@ -253,7 +253,7 @@ class Reporter:
         plot = Scatter()
         plot.add(problem.pareto_front(), plot_type="line", color="black", alpha=0.7)
         plot.add(res.F, color="red")
-        plot.tight_layout = True
+        #plot.tight_layout = True
         plot.save("{}_{}_{}.png".format(self.fig_file_path, algorithm, run))
         if self.config.SHOW_PLOT:
             plot.show()
