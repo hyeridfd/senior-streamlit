@@ -73,19 +73,19 @@ class MenuPlanningProblem(ElementwiseProblem):
 
         # 디버깅용: 각 dish_type별 샘플 가능 음식 수 및 음식명 출력
         # print("\n✅ 샘플 가능한 음식 현황:")
-        for name, df in [
-            ("밥", self.first_dish_type),
-            ("국", self.second_dish_type),
-            ("주찬", self.third_dish_type),
-            ("부찬", self.fourth_dish_type),
-            ("김치", self.fifth_dish_type),
-        ]:
-            # count = len(df)
-            # print(f"[{name}] 개수: {count}")
-            # if count > 0:
-            #     print(f"→ 음식명 예시: {df['meal_name'].head().tolist()}")
-            # else:
-            #     print(f"→ 샘플 불가 (조건에 맞는 음식 없음)")
+        # for name, df in [
+        #     ("밥", self.first_dish_type),
+        #     ("국", self.second_dish_type),
+        #     ("주찬", self.third_dish_type),
+        #     ("부찬", self.fourth_dish_type),
+        #     ("김치", self.fifth_dish_type),
+        # ]:
+        #     count = len(df)
+        #     print(f"[{name}] 개수: {count}")
+        #     if count > 0:
+        #         print(f"→ 음식명 예시: {df['meal_name'].head().tolist()}")
+        #     else:
+        #         print(f"→ 샘플 불가 (조건에 맞는 음식 없음)")
 
         #self.first_dish_type = self.df[self.df['dish_type'] == 0]  # 밥
         # self.second_dish_type = self.df[self.df['dish_type'] == 1]  # 국
@@ -94,10 +94,10 @@ class MenuPlanningProblem(ElementwiseProblem):
         # self.fifth_dish_type = self.df[self.df['dish_type'] == 4]  # 김치
         # append 제거: 리스트 컴프리헨션 사용
 
-            self.fitness_functions = [
-                FitnessFunctions(function=ff['function'], weight=ff['weight'])
-                for ff in self.conf.FITNESS_FUNCTIONS
-            ]
+        self.fitness_functions = [
+            FitnessFunctions(function=ff['function'], weight=ff['weight'])
+            for ff in self.conf.FITNESS_FUNCTIONS
+        ]
         
     def get_one_dish_type(self, dish_type):
         if dish_type == 0:
