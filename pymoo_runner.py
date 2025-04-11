@@ -1,6 +1,7 @@
 import sys
 import os
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 import numpy as np
 import streamlit as st
 import pandas as pd
@@ -136,6 +137,8 @@ def run_optimization_from_streamlit(conf):
             st.text("\n".join(desc))
 
         st.markdown("## 📊 영양소 섭취량")
+
+        # 1. 데이터 구성
         daily_nutrients = {"Day": [], "Energy": [], "Cho": [], "Protein": [], "Fat": []}
         for day_idx, day in enumerate(best_sol.days):
             daily_nutrients["Day"].append(f"Day {day_idx + 1}")
@@ -143,18 +146,55 @@ def run_optimization_from_streamlit(conf):
             daily_nutrients["Cho"].append(day.dish_types["cho"].sum())
             daily_nutrients["Protein"].append(day.dish_types["protein"].sum())
             daily_nutrients["Fat"].append(day.dish_types["fat"].sum())
-
+        
         df_nutrients = pd.DataFrame(daily_nutrients)
-        fig, axes = plt.subplots(4, 1, figsize=(8, 12))
-        for ax, (key, (min_val, max_val), label) in zip(axes,
-            zip(["Energy", "Cho", "Protein", "Fat"],
-                [conf.NUTRIENT_BOUNDS[k] for k in ["kcal", "cho", "protein", "fat"]],
-                ["energy(kcal)", "cho(g)", "protein(g)", "fat(g)"])):
-            ax.bar(df_nutrients["Day"], df_nutrients[key], color="skyblue")
-            ax.axhline(max_val, color='red', linestyle='--', label='MAX')
-            ax.axhline(min_val, color='blue', linestyle='--', label='MIN')
-            ax.set_title(label)
-            ax.set_ylabel("AMOUNT")
-            ax.legend()
-        plt.tight_layout()
-        st.pyplot(fig)
+        
+        # 2. Streamlit column으로 가로 배치
+        cols = st.columns(4)
+        
+        nutrient_keys = [("Energy", "kcal", "Energy (kcal)"),
+                         ("Cho", "cho", "Carbs (g)"),
+                         ("Protein", "protein", "Protein (g)"),
+                         ("Fat", "fat", "Fat (g)")]
+        
+        for i, (key, bound_key, label) in enumerate(nutrient_keys):
+            min_val, max_val = conf.NUTRIENT_BOUNDS[bound_key]
+            fig = go.Figure()
+            
+            # 바 그래프
+            fig.add_trace(go.Bar(
+                x=df_nutrients["Day"],
+                y=df_nutrients[key],
+                name=label,
+                marker_color='skyblue'
+            ))
+            
+            # 최소선
+            fig.add_trace(go.Scatter(
+                x=df_nutrients["Day"],
+                y=[min_val]*len(df_nutrients),
+                mode='lines',
+                name='Min',
+                line=dict(color='blue', dash='dash')
+            ))
+        
+            # 최대선
+            fig.add_trace(go.Scatter(
+                x=df_nutrients["Day"],
+                y=[max_val]*len(df_nutrients),
+                mode='lines',
+                name='Max',
+                line=dict(color='red', dash='dash')
+            ))
+            
+            fig.update_layout(
+                title=label,
+                xaxis_title="Day",
+                yaxis_title="Amount",
+                height=350,
+                margin=dict(t=50, l=30, r=30, b=30)
+            )
+            
+            cols[i].plotly_chart(fig, use_container_width=True)
+        
+        st.caption("각 영양소 섭취량은 기준선 사이에 있으면 적절한 섭취입니다.")
