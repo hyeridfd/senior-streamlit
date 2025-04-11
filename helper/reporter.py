@@ -174,6 +174,7 @@ class Reporter:
                 saveRes.write(csv_text)
                 #print(f"[DEBUG ✅] CSV 파일 작성 완료: {self.pymoo_file_path}")
         except Exception as e:
+            pass
             #print(f"[❌ ERROR] CSV 저장 실패: {e}")
 
 
