@@ -8,12 +8,12 @@ class PymooCrossover(Crossover):
         super().__init__(2, 2)  # 부모 2명 → 자식 2명
 
     def _do(self, problem, X, **kwargs):
-        print("✅ [Before Fix] X.shape:", X.shape)
+        #print("✅ [Before Fix] X.shape:", X.shape)
 
         # 강제로 X 차원 바꿔주기 (임시 조치)
         if X.shape[1] != 2:
             X = np.transpose(X, (1, 0, 2))  # (2, 10, 1) → (10, 2, 1)
-            print("✅ [After Fix] X.shape:", X.shape)
+            #print("✅ [After Fix] X.shape:", X.shape)
 
         n_matings = X.shape[0]
         n_var = problem.n_var
@@ -29,7 +29,7 @@ class PymooCrossover(Crossover):
             off[0, k, 0] = off_a
             off[1, k, 0] = off_b
 
-        print("✅ [Crossover] off.shape:", off.shape)
+        #print("✅ [Crossover] off.shape:", off.shape)
         return off
 
 
