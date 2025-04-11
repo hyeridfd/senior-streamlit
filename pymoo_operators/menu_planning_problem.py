@@ -18,7 +18,7 @@ class MenuPlanningProblem(ElementwiseProblem):
     def __init__(self, argv=[], file_path='./data/dataset.csv', df=None, external_conf=None):
         self.conf = external_conf if external_conf else Config(argv)
         super().__init__(n_var=1, n_obj=self.conf.FITNESS_FUNCTIONS.__len__())
-        print("[MenuPlanningProblem] 받은 Config 객체의 ENERGY 값:", self.conf.ENERGY)
+        #print("[MenuPlanningProblem] 받은 Config 객체의 ENERGY 값:", self.conf.ENERGY)
 
 
         try:
@@ -93,10 +93,11 @@ class MenuPlanningProblem(ElementwiseProblem):
         # self.fourth_dish_type = self.df[self.df['dish_type'] == 3]  # 부찬
         # self.fifth_dish_type = self.df[self.df['dish_type'] == 4]  # 김치
         # append 제거: 리스트 컴프리헨션 사용
-        self.fitness_functions = [
-            FitnessFunctions(function=ff['function'], weight=ff['weight'])
-            for ff in self.conf.FITNESS_FUNCTIONS
-        ]
+
+            self.fitness_functions = [
+                FitnessFunctions(function=ff['function'], weight=ff['weight'])
+                for ff in self.conf.FITNESS_FUNCTIONS
+            ]
         
     def get_one_dish_type(self, dish_type):
         if dish_type == 0:
