@@ -172,9 +172,9 @@ class Reporter:
         try:
             with open(self.pymoo_file_path, 'a') as saveRes:
                 saveRes.write(csv_text)
-                print(f"[DEBUG ✅] CSV 파일 작성 완료: {self.pymoo_file_path}")
+                #print(f"[DEBUG ✅] CSV 파일 작성 완료: {self.pymoo_file_path}")
         except Exception as e:
-            print(f"[❌ ERROR] CSV 저장 실패: {e}")
+            #print(f"[❌ ERROR] CSV 저장 실패: {e}")
 
 
     def highlight_max(self, x, color):
@@ -271,9 +271,9 @@ class Reporter:
             n_evals = n_evals + [algo.evaluator.n_eval]
             # retrieve the optimum from the algorithm
             opt = algo.opt
-            print("✅ 개체 수:", len(opt))
-            print("✅ opt.get('F'):", opt.get("F"))
-            print("✅ opt.get('feasible'):", opt.get("feasible"))
+            # print("✅ 개체 수:", len(opt))
+            # print("✅ opt.get('F'):", opt.get("F"))
+            # print("✅ opt.get('feasible'):", opt.get("feasible"))
             # filter out only the feasible and append and objective space values
             feas = np.where(opt.get("feasible"))[0]
             hist_F = hist_F + [opt.get("F")[feas]]
@@ -285,16 +285,16 @@ class Reporter:
         igd_metric = IGD(pf=np.array([0] * self.config.FITNESS_FUNCTIONS.__len__()), zero_to_one=False)
         igd_p_metric = IGDPlus(pf=np.array([0] * self.config.FITNESS_FUNCTIONS.__len__()), zero_to_one=False)
 
-        # 📌 여기서 디버깅!
-        print("📌 GD 계산 디버깅 ------------------")
-        for i, (_F, eval_num) in enumerate(zip(hist_F, n_evals)):
-            print(f"📘 Generation {i+1} - Function Evaluations: {eval_num}")
-            print("F 값:\n", _F)
-            print("→ GD:", gd_metric.do(_F))
-            print("→ GD+:", gd_p_metric.do(_F))
-            print("→ IGD:", igd_metric.do(_F))
-            print("→ IGD+:", igd_p_metric.do(_F))
-            print("-" * 40)
+        # # 📌 여기서 디버깅!
+        # print("📌 GD 계산 디버깅 ------------------")
+        # for i, (_F, eval_num) in enumerate(zip(hist_F, n_evals)):
+        #     print(f"📘 Generation {i+1} - Function Evaluations: {eval_num}")
+        #     print("F 값:\n", _F)
+        #     print("→ GD:", gd_metric.do(_F))
+        #     print("→ GD+:", gd_p_metric.do(_F))
+        #     print("→ IGD:", igd_metric.do(_F))
+        #     print("→ IGD+:", igd_p_metric.do(_F))
+        #     print("-" * 40)
             
         hypervolume = [hypervolume_metric.do(_F) for _F in hist_F]
         gd = [gd_metric.do(_F) for _F in hist_F]
@@ -354,10 +354,10 @@ class Reporter:
             result = h.result()
             # 디버깅: 개체의 X 확인
             for ind in h.pop:
-                print("F value:", ind.F)
-                if (ind.F <= 0).any():
-                    print("⚠️ 음수 또는 0이 있음:", ind.F)
-                print(f"[DEBUG] Generation {h.n_iter} - ind.X type: {type(ind.X)}")
+                # print("F value:", ind.F)
+                # if (ind.F <= 0).any():
+                #     print("⚠️ 음수 또는 0이 있음:", ind.F)
+                # print(f"[DEBUG] Generation {h.n_iter} - ind.X type: {type(ind.X)}")
 
                 val = ind.X
                 
@@ -369,16 +369,16 @@ class Reporter:
                 if isinstance(val, np.ndarray) and len(val) > 0 and isinstance(val[0], Solution):
                     ind.data["solution"] = val[0]
                     ind.data["total_fitness"] = ind.F[0]
-                    print(f"[DEBUG] → solution 등록 완료 (type: {type(val[0])}, fitness: {ind.F[0]:.4f})")
+                    #print(f"[DEBUG] → solution 등록 완료 (type: {type(val[0])}, fitness: {ind.F[0]:.4f})")
 
                 # val이 Solution 객체인 경우
                 elif isinstance(val, Solution):
                     ind.data["solution"] = val
                     ind.data["total_fitness"] = ind.F[0]
-                    print(f"[DEBUG] → solution 등록 완료 (type: {type(val)}, fitness: {ind.F[0]:.4f})")
+                    #print(f"[DEBUG] → solution 등록 완료 (type: {type(val)}, fitness: {ind.F[0]:.4f})")
 
                 else:
-                    print(f"[DEBUG] → 등록 실패: val type = {type(val)}, val = {val}")
+                    #print(f"[DEBUG] → 등록 실패: val type = {type(val)}, val = {val}")
                             # ✅ 등록 실패한 경우
                 
             #ind_fitnesses = [x.total_fitness for x in result.X]
@@ -412,69 +412,69 @@ class Reporter:
                      hyp, gd, gd_p, igd, igd_p, energy, cho, protein, fat, time)
 
 
-    def conv_plot(self, algorithm, n_evals, opt, run):
-        plt.clf()
-        plt.title("Convergence for {} algoritm".format(algorithm))
-        plt.plot(n_evals, opt, "--")
-        plt.yscale("log")
-        plt.xlabel("Function Evaluations")
-        plt.ylabel("Mean objective value")
-        plt.tight_layout()
-        plt.savefig("{}_{}_{}.png".format(self.conv_file_path, algorithm, run), dpi=300)
-        #if self.config.SHOW_PLOT:
-            #plt.show()
-        #else:
-        plt.clf()
+#     def conv_plot(self, algorithm, n_evals, opt, run):
+#         plt.clf()
+#         plt.title("Convergence for {} algoritm".format(algorithm))
+#         plt.plot(n_evals, opt, "--")
+#         plt.yscale("log")
+#         plt.xlabel("Function Evaluations")
+#         plt.ylabel("Mean objective value")
+#         plt.tight_layout()
+#         plt.savefig("{}_{}_{}.png".format(self.conv_file_path, algorithm, run), dpi=300)
+#         #if self.config.SHOW_PLOT:
+#             #plt.show()
+#         #else:
+#         plt.clf()
 
-#JSON 포맷으로 솔루션 만들기
-    def generate_solution_json(self, solution):
-        response_dict = []
-        float_format = '{:.2f}'
-        float_format_percent = '%{:.2f}'
-        fitness_dict = []
+# #JSON 포맷으로 솔루션 만들기
+#     def generate_solution_json(self, solution):
+#         response_dict = []
+#         float_format = '{:.2f}'
+#         float_format_percent = '%{:.2f}'
+#         fitness_dict = []
 
-        for fitness in solution.fitness_functions:
-            fitness_dict += [{
-                'name': fitness.function.get_name(),
-                'value': np.round(1 - fitness.value, 2),
-                'percentage': np.round((1 - fitness.value) * 100, 2)
-            }]
+#         for fitness in solution.fitness_functions:
+#             fitness_dict += [{
+#                 'name': fitness.function.get_name(),
+#                 'value': np.round(1 - fitness.value, 2),
+#                 'percentage': np.round((1 - fitness.value) * 100, 2)
+#             }]
 
-        for idx, day in enumerate(solution.days):
-            meal = day.dish_types[constants.FOOD_INDEX]
-            energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
-            cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
-            protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
-            fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
-            data = {'day': idx + 1,
-                    'menu': [str(m) for m in meal],
-                    'energy': float_format.format(energy),
-                    'p_energy': float_format_percent.format(energy / self.config.ENERGY * 100),
-                    'cho': float_format.format(cho),
-                    'p_cho': float_format_percent.format(cho / self.config.CHO * 100),
-                    'protein': float_format.format(protein),
-                    'p_protein': float_format_percent.format(protein / self.config.PROTEIN * 100),
-                    'fat': float_format.format(fat),
-                    'p_fat': float_format_percent.format(fat / self.config.FAT * 100),
-                    }
-            response_dict += [data]
-        return {
-            'data': response_dict,
-            'algorithm': self.config.ALGORITHM,
-            'fitnesses': fitness_dict,
-            'config': {
-                'energy': self.config.ENERGY,
-                'cho': self.config.CHO,
-                'protein': self.config.PROTEIN,
-                'fat': self.config.FAT,
-                'tolerance': self.config.TOLERANCE,
-                'operators': {
-                    'crossover': self.config.OPERATORS['crossover'].__class__.__name__,
-                    'mutation': self.config.OPERATORS['mutation'].__class__.__name__,
-                    'selection': self.config.OPERATORS['selection'].__class__.__name__,
-                },
-                'number_of_population': self.config.NUMBER_OF_POPULATION,
-                'maximum_evaluation': self.config.MAXIMUM_EVALUATION,
-                'random_seed': self.config.RANDOM_SEED
-            }
-        }
+#         for idx, day in enumerate(solution.days):
+#             meal = day.dish_types[constants.FOOD_INDEX]
+#             energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
+#             cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
+#             protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
+#             fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
+#             data = {'day': idx + 1,
+#                     'menu': [str(m) for m in meal],
+#                     'energy': float_format.format(energy),
+#                     'p_energy': float_format_percent.format(energy / self.config.ENERGY * 100),
+#                     'cho': float_format.format(cho),
+#                     'p_cho': float_format_percent.format(cho / self.config.CHO * 100),
+#                     'protein': float_format.format(protein),
+#                     'p_protein': float_format_percent.format(protein / self.config.PROTEIN * 100),
+#                     'fat': float_format.format(fat),
+#                     'p_fat': float_format_percent.format(fat / self.config.FAT * 100),
+#                     }
+#             response_dict += [data]
+#         return {
+#             'data': response_dict,
+#             'algorithm': self.config.ALGORITHM,
+#             'fitnesses': fitness_dict,
+#             'config': {
+#                 'energy': self.config.ENERGY,
+#                 'cho': self.config.CHO,
+#                 'protein': self.config.PROTEIN,
+#                 'fat': self.config.FAT,
+#                 'tolerance': self.config.TOLERANCE,
+#                 'operators': {
+#                     'crossover': self.config.OPERATORS['crossover'].__class__.__name__,
+#                     'mutation': self.config.OPERATORS['mutation'].__class__.__name__,
+#                     'selection': self.config.OPERATORS['selection'].__class__.__name__,
+#                 },
+#                 'number_of_population': self.config.NUMBER_OF_POPULATION,
+#                 'maximum_evaluation': self.config.MAXIMUM_EVALUATION,
+#                 'random_seed': self.config.RANDOM_SEED
+#             }
+#         }
