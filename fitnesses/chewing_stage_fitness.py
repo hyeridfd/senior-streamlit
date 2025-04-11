@@ -25,10 +25,10 @@ class ChewingStageFitness(AbstractFitness):
 
             chewing_levels = chewing_levels.astype(float)
 
-            print("🧪 [디버깅] 현재 평가 중인 식단 하루치:")
-            print("chewing_levels:", chewing_levels)
-            print("target:", self.target_chewing_level)
-            print("abs diff:", np.abs(chewing_levels - self.target_chewing_level))
+            # print("🧪 [디버깅] 현재 평가 중인 식단 하루치:")
+            # print("chewing_levels:", chewing_levels)
+            # print("target:", self.target_chewing_level)
+            # print("abs diff:", np.abs(chewing_levels - self.target_chewing_level))
                         # 각 식재료 저작단계와 사용자 저작단계의 차이가 1 보다 큰 경우 0점 처리 (ex. 1단계인데 3단계 음식 추천해주는 등)
             if np.any(np.abs(chewing_levels - self.target_chewing_level) > 1):
                 print("🚨 [경고] 저작단계 차이 2 이상 → 0점 처리")
