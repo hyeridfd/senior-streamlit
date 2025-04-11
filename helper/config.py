@@ -91,15 +91,15 @@ class Config:
                     'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.1),
                     'fat': (self.FAT * 0.9, self.FAT * 1.1),
                     'cho': (self.CHO * 0.9, self.CHO * 1.1)
-            }), 'weight': 0.5
+            }), 'weight': 0.8
             },
             {
                 'function': MainIngredientFitness(),
-                'weight': 0.2
+                'weight': 0.1
             },
             {
                 'function': RepetitionFitness(),
-                'weight': 0.3
+                'weight': 0.1
             }
         ]
 
