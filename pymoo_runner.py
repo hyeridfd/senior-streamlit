@@ -272,7 +272,7 @@ def run_optimization_from_streamlit(conf):
         protein_min, protein_max = conf.NUTRIENT_BOUNDS["protein"]
         fat_min, fat_max = conf.NUTRIENT_BOUNDS["fat"]
 
-        fig, axes = plt.subplots(4, 1, figsize=(8, 12))
+        fig, axes = plt.subplots(1, 4, figsize=(8, 12))
 
         nutrient_info = [
             ("Energy", kcal_min, kcal_max, "energy(kcal)"),
