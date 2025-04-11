@@ -79,7 +79,7 @@ class Config:
             'fat': (self.FAT * 0.9, self.FAT * 1.5),
             }
         # Print NUTRIENT_BOUNDS to verify it is set correctly
-        print(f"[DEBUG] NUTRIENT_BOUNDS: {self.NUTRIENT_BOUNDS}")
+        #print(f"[DEBUG] NUTRIENT_BOUNDS: {self.NUTRIENT_BOUNDS}")
 
         self.NUMBER_OF_DAYS = int(config['MENU']['NumberOfDays'])
         self.DISH_TYPE_SIZE = int(config['MENU']['DishTypeSize'])
