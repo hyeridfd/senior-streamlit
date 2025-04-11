@@ -9,8 +9,8 @@ from fitnesses.main_ingredient_fitness import MainIngredientFitness
 #from fitnesses.meal_group_fitness import MealGroupFitness
 from fitnesses.nutrient_fitness import NutrientFitness
 from fitnesses.repetition_fitness import RepetitionFitness
-from fitnesses.chewing_stage_fitness import ChewingStageFitness
-from fitnesses.user_preference_fitness import PreferenceFitness
+#from fitnesses.chewing_stage_fitness import ChewingStageFitness
+#from fitnesses.user_preference_fitness import PreferenceFitness
 
 
 # def singleton(class_):
@@ -87,27 +87,19 @@ class Config:
         self.FITNESS_FUNCTIONS = [
             {
                 'function': NutrientFitness({
-                    'kcal': (self.ENERGY * 0.9, self.ENERGY * 1.5),
-                    'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.5),
-                    'fat': (self.FAT * 0.9, self.FAT * 1.5),
-                    'cho': (self.CHO * 0.9, self.CHO * 1.5)
-            }), 'weight': 1.0
-            },
-            {
-                'function': ChewingStageFitness(self.CHEWING_STAGE),
-                'weight': 0.05
+                    'kcal': (self.ENERGY * 0.9, self.ENERGY * 1.1),
+                    'protein': (self.PROTEIN * 0.9, self.PROTEIN * 1.1),
+                    'fat': (self.FAT * 0.9, self.FAT * 1.1),
+                    'cho': (self.CHO * 0.9, self.CHO * 1.1)
+            }), 'weight': 0.5
             },
             {
                 'function': MainIngredientFitness(),
-                'weight': 0.05
+                'weight': 0.2
             },
             {
                 'function': RepetitionFitness(),
-                'weight': 0.05
-            },
-            {
-                'function': PreferenceFitness(self.PREFERENCE),
-                'weight': 0.05
+                'weight': 0.3
             }
         ]
 
