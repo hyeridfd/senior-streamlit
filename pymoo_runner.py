@@ -131,10 +131,23 @@ def run_optimization_from_streamlit(conf):
         st.markdown(f"### 🎯 총 적합도 점수: **{best_sol.total_fitness:.4f}**")
 
         st.subheader("🥗 식단 설명")
-        for day_idx, day in enumerate(best_sol.days):
+        for day_idx, day in enumerate(best_ind.days):
             st.markdown(f"**Day {day_idx + 1}**")
-            desc = [f"- {row['meal_name']} (열량: {row['energy']:.2f} kcal, 탄수화물: {row['cho']:.2f}g, 단백질: {row['protein']:.2f}g, 지방: {row['fat']:.2f}g, 저작단계: {row['chewing_stage']}, 선호도: {reverse_preference_map.get(row['preference'], '정보없음')})" for _, row in day.dish_types.iterrows()]
-            st.text("\n".join(desc))
+            day_description = ""
+            day_energy = 0
+            day_cho = 0
+            day_protein = 0
+            day_fat = 0
+
+            for _, row in day.dish_types.iterrows():
+                pref_kor = reverse_preference_map.get(row['preference'], "정보없음")
+                day_description += f"- {row['meal_name']} (열량: {row['energy']:.2f} kcal, 탄수화물: {row['cho']:.2f}g, 단백질: {row['protein']:.2f}g, 지방: {row['fat']:.2f}g, 저작단계: {row['chewing_stage']}, 선호도: {pref_kor})\n"
+                day_energy += row['energy']
+                day_cho += row['cho']
+                day_protein += row['protein']
+                day_fat += row['fat']
+            st.text(day_description)
+            st.write(f"**Day {day_idx+1} 총 영양소:** 열량 {day_energy:.2f} kcal, 탄수화물 {day_cho:.2f}g, 단백질 {day_protein:.2f}g, 지방 {day_fat:.2f}g")
 
         st.markdown("## 📊 영양소 섭취량")
 
