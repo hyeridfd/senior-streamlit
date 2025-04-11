@@ -120,7 +120,7 @@ def run_optimization_from_streamlit(conf):
         for gen_idx, h in enumerate(res.history):
             best_fitness = float('inf')
             best_ind = None
-            print(f"\n📘 Generation {gen_idx + 1}")
+            #print(f"\n📘 Generation {gen_idx + 1}")
             for i, ind in enumerate(h.pop):
                 print(f"  - 개체 {i}: F = {ind.F}")
                 val = ind.X
@@ -128,22 +128,22 @@ def run_optimization_from_streamlit(conf):
                 if isinstance(val, Solution):
                     ind.data["solution"] = val
                     ind.data["total_fitness"] = val.total_fitness
-                    print(f"[DEBUG] ind.X is Solution. total_fitness: {val.total_fitness}")
+                    #print(f"[DEBUG] ind.X is Solution. total_fitness: {val.total_fitness}")
                 # val이 ndarray이면서 첫 번째가 Solution이면
                 elif isinstance(val, np.ndarray) and isinstance(val[0], Solution):
                     ind.data["solution"] = val[0]
                     ind.data["total_fitness"] = val[0].total_fitness
-                    print(f"[DEBUG] ind.X[0] is Solution. total_fitness: {val[0].total_fitness}")
+                    #print(f"[DEBUG] ind.X[0] is Solution. total_fitness: {val[0].total_fitness}")
                 # 그 외에 튜플 형태로 받은 경우 (옛날 코드)
                 elif isinstance(val, tuple) and hasattr(val[0], "days"):
                     ind.data["solution"] = val[0]
                     ind.data["total_fitness"] = val[1]
-                    print(f"[DEBUG] val is tuple. total_fitness: {val[1]}")
+                    #print(f"[DEBUG] val is tuple. total_fitness: {val[1]}")
                 else:
-                    print(f"[WARNING] 예상치 못한 ind.X 형식: {type(val)}")
+                    #print(f"[WARNING] 예상치 못한 ind.X 형식: {type(val)}")
 
                 total_fitness = ind.data.get("total_fitness")
-                print(f"[DEBUG] 개체 {i}의 total_fitness: {total_fitness}")
+                #print(f"[DEBUG] 개체 {i}의 total_fitness: {total_fitness}")
                 if total_fitness is not None and total_fitness < best_fitness:
                     best_fitness = total_fitness
                     best_ind = ind.data["solution"]
