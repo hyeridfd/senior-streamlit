@@ -11,7 +11,6 @@ from pymoo_runner import run_optimization_from_streamlit
 
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 푸드 솔루션", page_icon="🧓")
-st.write("✅ 앱 정상 진입됨!")
 
 st.image("./logo.png", width=150)
 
