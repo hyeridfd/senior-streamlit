@@ -118,7 +118,7 @@ if st.session_state.mode == "🥗 개인 맞춤 식단 추천":
         with col2:
             weight = st.number_input("체중 (kg)", min_value=20.0, max_value=200.0, value=66.0)
             pa = st.selectbox("활동수준", ["낮음", "보통", "활동적"], index=1)
-            waist = st.number_input("허리둘레 (cm)", min_value=50.0, max_value=150.0, value=85.0)
+            waist = st.number_input("허리둘레 (cm)", min_value=50.0, max_value=150.0, value=90.0)
             chewing_stage = st.selectbox("저작 단계", ["1단계", "2단계", "3단계"], index=0)
     
         submitted = st.form_submit_button("식단 설계 실행")
