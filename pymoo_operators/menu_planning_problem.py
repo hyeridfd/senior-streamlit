@@ -9,7 +9,7 @@ import pandas as pd
 # from fitnesses.consistency_fitness import ConsistencyFitness
 from fitnesses.main_ingredient_fitness import MainIngredientFitness
 from fitnesses.nutrient_fitness import NutrientFitness
-from fitnesses.chewing_stage_fitness import ChewingStageFitness
+#from fitnesses.chewing_stage_fitness import ChewingStageFitness
 
 from helper.config import Config
 from solution import FitnessFunctions
