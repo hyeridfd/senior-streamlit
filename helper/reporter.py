@@ -414,69 +414,69 @@ class Reporter:
                      hyp, gd, gd_p, igd, igd_p, energy, cho, protein, fat, time)
 
 
-#     def conv_plot(self, algorithm, n_evals, opt, run):
-#         plt.clf()
-#         plt.title("Convergence for {} algoritm".format(algorithm))
-#         plt.plot(n_evals, opt, "--")
-#         plt.yscale("log")
-#         plt.xlabel("Function Evaluations")
-#         plt.ylabel("Mean objective value")
-#         plt.tight_layout()
-#         plt.savefig("{}_{}_{}.png".format(self.conv_file_path, algorithm, run), dpi=300)
-#         #if self.config.SHOW_PLOT:
-#             #plt.show()
-#         #else:
-#         plt.clf()
+    def conv_plot(self, algorithm, n_evals, opt, run):
+        plt.clf()
+        plt.title("Convergence for {} algoritm".format(algorithm))
+        plt.plot(n_evals, opt, "--")
+        plt.yscale("log")
+        plt.xlabel("Function Evaluations")
+        plt.ylabel("Mean objective value")
+        plt.tight_layout()
+        plt.savefig("{}_{}_{}.png".format(self.conv_file_path, algorithm, run), dpi=300)
+        #if self.config.SHOW_PLOT:
+            #plt.show()
+        #else:
+        plt.clf()
 
-# #JSON 포맷으로 솔루션 만들기
-#     def generate_solution_json(self, solution):
-#         response_dict = []
-#         float_format = '{:.2f}'
-#         float_format_percent = '%{:.2f}'
-#         fitness_dict = []
+#JSON 포맷으로 솔루션 만들기
+    def generate_solution_json(self, solution):
+        response_dict = []
+        float_format = '{:.2f}'
+        float_format_percent = '%{:.2f}'
+        fitness_dict = []
 
-#         for fitness in solution.fitness_functions:
-#             fitness_dict += [{
-#                 'name': fitness.function.get_name(),
-#                 'value': np.round(1 - fitness.value, 2),
-#                 'percentage': np.round((1 - fitness.value) * 100, 2)
-#             }]
+        for fitness in solution.fitness_functions:
+            fitness_dict += [{
+                'name': fitness.function.get_name(),
+                'value': np.round(1 - fitness.value, 2),
+                'percentage': np.round((1 - fitness.value) * 100, 2)
+            }]
 
-#         for idx, day in enumerate(solution.days):
-#             meal = day.dish_types[constants.FOOD_INDEX]
-#             energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
-#             cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
-#             protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
-#             fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
-#             data = {'day': idx + 1,
-#                     'menu': [str(m) for m in meal],
-#                     'energy': float_format.format(energy),
-#                     'p_energy': float_format_percent.format(energy / self.config.ENERGY * 100),
-#                     'cho': float_format.format(cho),
-#                     'p_cho': float_format_percent.format(cho / self.config.CHO * 100),
-#                     'protein': float_format.format(protein),
-#                     'p_protein': float_format_percent.format(protein / self.config.PROTEIN * 100),
-#                     'fat': float_format.format(fat),
-#                     'p_fat': float_format_percent.format(fat / self.config.FAT * 100),
-#                     }
-#             response_dict += [data]
-#         return {
-#             'data': response_dict,
-#             'algorithm': self.config.ALGORITHM,
-#             'fitnesses': fitness_dict,
-#             'config': {
-#                 'energy': self.config.ENERGY,
-#                 'cho': self.config.CHO,
-#                 'protein': self.config.PROTEIN,
-#                 'fat': self.config.FAT,
-#                 'tolerance': self.config.TOLERANCE,
-#                 'operators': {
-#                     'crossover': self.config.OPERATORS['crossover'].__class__.__name__,
-#                     'mutation': self.config.OPERATORS['mutation'].__class__.__name__,
-#                     'selection': self.config.OPERATORS['selection'].__class__.__name__,
-#                 },
-#                 'number_of_population': self.config.NUMBER_OF_POPULATION,
-#                 'maximum_evaluation': self.config.MAXIMUM_EVALUATION,
-#                 'random_seed': self.config.RANDOM_SEED
-#             }
-#         }
+        for idx, day in enumerate(solution.days):
+            meal = day.dish_types[constants.FOOD_INDEX]
+            energy = np.round(day.dish_types[constants.ENERGY_INDEX].sum(), 4)
+            cho = np.round(day.dish_types._get_column_array(constants.CHO_INDEX).sum(), 4)
+            protein = np.round(day.dish_types[constants.PROTEIN_INDEX].sum(), 4)
+            fat = np.round(day.dish_types[constants.FAT_INDEX].sum(), 4)
+            data = {'day': idx + 1,
+                    'menu': [str(m) for m in meal],
+                    'energy': float_format.format(energy),
+                    'p_energy': float_format_percent.format(energy / self.config.ENERGY * 100),
+                    'cho': float_format.format(cho),
+                    'p_cho': float_format_percent.format(cho / self.config.CHO * 100),
+                    'protein': float_format.format(protein),
+                    'p_protein': float_format_percent.format(protein / self.config.PROTEIN * 100),
+                    'fat': float_format.format(fat),
+                    'p_fat': float_format_percent.format(fat / self.config.FAT * 100),
+                    }
+            response_dict += [data]
+        return {
+            'data': response_dict,
+            'algorithm': self.config.ALGORITHM,
+            'fitnesses': fitness_dict,
+            'config': {
+                'energy': self.config.ENERGY,
+                'cho': self.config.CHO,
+                'protein': self.config.PROTEIN,
+                'fat': self.config.FAT,
+                'tolerance': self.config.TOLERANCE,
+                'operators': {
+                    'crossover': self.config.OPERATORS['crossover'].__class__.__name__,
+                    'mutation': self.config.OPERATORS['mutation'].__class__.__name__,
+                    'selection': self.config.OPERATORS['selection'].__class__.__name__,
+                },
+                'number_of_population': self.config.NUMBER_OF_POPULATION,
+                'maximum_evaluation': self.config.MAXIMUM_EVALUATION,
+                'random_seed': self.config.RANDOM_SEED
+            }
+        }
