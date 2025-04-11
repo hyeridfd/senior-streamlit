@@ -71,7 +71,7 @@ st.caption("시니어의 건강 상태와 저작 능력을 고려한 식단 추�
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
 
-print("✅ openai version:", openai.__version__)
+#print("✅ openai version:", openai.__version__)
 
 # 세션 상태 초기화
 if 'message_list' not in st.session_state:
