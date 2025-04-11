@@ -203,87 +203,87 @@ def run_optimization_from_streamlit(conf):
                 )
 
             # ✅ 전체 5일치 식단표를 표로 출력
-    all_days_data = []
-    for day_idx, day in enumerate(best_sol.days):
-        df = day.dish_types.copy()
-        df["Day"] = f"Day {day_idx + 1}"
-        all_days_data.append(df)
+        all_days_data = []
+        for day_idx, day in enumerate(best_sol.days):
+            df = day.dish_types.copy()
+            df["Day"] = f"Day {day_idx + 1}"
+            all_days_data.append(df)
 
-    merged_df = pd.concat(all_days_data, ignore_index=True)
-    merged_df["preference"] = merged_df["preference"].map(reverse_preference_map).fillna("정보 없음")
+        merged_df = pd.concat(all_days_data, ignore_index=True)
+        merged_df["preference"] = merged_df["preference"].map(reverse_preference_map).fillna("정보 없음")
 
-    preview_df = merged_df[["Day", "meal_name", "energy", "cho", "protein", "fat", "chewing_stage", "preference"]].rename(columns={
-        "Day": "날짜",
-        "meal_name": "음식명",
-        "energy": "열량 (kcal)",
-        "cho": "탄수화물 (g)",
-        "protein": "단백질 (g)",
-        "fat": "지방 (g)",
-        "chewing_stage": "저작단계",
-        "preference": "선호도"
-    })
+        preview_df = merged_df[["Day", "meal_name", "energy", "cho", "protein", "fat", "chewing_stage", "preference"]].rename(columns={
+            "Day": "날짜",
+            "meal_name": "음식명",
+            "energy": "열량 (kcal)",
+            "cho": "탄수화물 (g)",
+            "protein": "단백질 (g)",
+            "fat": "지방 (g)",
+            "chewing_stage": "저작단계",
+            "preference": "선호도"
+        })
 
-    st.markdown("## 🍴 개인 맞춤 식단표")
-    st.dataframe(preview_df, use_container_width=True)
-    st.markdown(f"### 🎯 총 적합도 점수: **{best_sol.total_fitness:.4f}**")
+        st.markdown("## 🍴 개인 맞춤 식단표")
+        st.dataframe(preview_df, use_container_width=True)
+        st.markdown(f"### 🎯 총 적합도 점수: **{best_sol.total_fitness:.4f}**")
 
-    # ✅ Day별 설명 출력
-    st.subheader("🥗 식단 설명")
-    for day_idx, day in enumerate(best_sol.days):
-        st.markdown(f"**Day {day_idx + 1}**")
-        day_description = ""
-        day_energy = 0
-        day_cho = 0
-        day_protein = 0
-        day_fat = 0
+        # ✅ Day별 설명 출력
+        st.subheader("🥗 식단 설명")
+        for day_idx, day in enumerate(best_sol.days):
+            st.markdown(f"**Day {day_idx + 1}**")
+            day_description = ""
+            day_energy = 0
+            day_cho = 0
+            day_protein = 0
+            day_fat = 0
 
-        for _, row in day.dish_types.iterrows():
-            pref_kor = reverse_preference_map.get(row['preference'], "정보없음")
-            day_description += f"- {row['meal_name']} (열량: {row['energy']:.2f} kcal, 탄수화물: {row['cho']:.2f}g, 단백질: {row['protein']:.2f}g, 지방: {row['fat']:.2f}g, 저작단계: {row['chewing_stage']}, 선호도: {pref_kor})\n"
-            day_energy += row['energy']
-            day_cho += row['cho']
-            day_protein += row['protein']
-            day_fat += row['fat']
+            for _, row in day.dish_types.iterrows():
+                pref_kor = reverse_preference_map.get(row['preference'], "정보없음")
+                day_description += f"- {row['meal_name']} (열량: {row['energy']:.2f} kcal, 탄수화물: {row['cho']:.2f}g, 단백질: {row['protein']:.2f}g, 지방: {row['fat']:.2f}g, 저작단계: {row['chewing_stage']}, 선호도: {pref_kor})\n"
+                day_energy += row['energy']
+                day_cho += row['cho']
+                day_protein += row['protein']
+                day_fat += row['fat']
 
-        st.text(day_description)
-        st.write(f"**Day {day_idx+1} 총 영양소:** 열량 {day_energy:.2f} kcal, 탄수화물 {day_cho:.2f}g, 단백질 {day_protein:.2f}g, 지방 {day_fat:.2f}g")
+            st.text(day_description)
+            st.write(f"**Day {day_idx+1} 총 영양소:** 열량 {day_energy:.2f} kcal, 탄수화물 {day_cho:.2f}g, 단백질 {day_protein:.2f}g, 지방 {day_fat:.2f}g")
 
-    # ✅ 하루별 영양소 섭취량 시각화
-    st.markdown("## 📊 영양소 섭취량")
-    daily_nutrients = {"Day": [], "Energy": [], "Cho": [], "Protein": [], "Fat": []}
-    for day_idx, day in enumerate(best_sol.days):
-        energy = day.dish_types["energy"].sum()
-        cho = day.dish_types["cho"].sum()
-        protein = day.dish_types["protein"].sum()
-        fat = day.dish_types["fat"].sum()
-        daily_nutrients["Day"].append(f"Day {day_idx + 1}")
-        daily_nutrients["Energy"].append(energy)
-        daily_nutrients["Cho"].append(cho)
-        daily_nutrients["Protein"].append(protein)
-        daily_nutrients["Fat"].append(fat)
+        # ✅ 하루별 영양소 섭취량 시각화
+        st.markdown("## 📊 영양소 섭취량")
+        daily_nutrients = {"Day": [], "Energy": [], "Cho": [], "Protein": [], "Fat": []}
+        for day_idx, day in enumerate(best_sol.days):
+            energy = day.dish_types["energy"].sum()
+            cho = day.dish_types["cho"].sum()
+            protein = day.dish_types["protein"].sum()
+            fat = day.dish_types["fat"].sum()
+            daily_nutrients["Day"].append(f"Day {day_idx + 1}")
+            daily_nutrients["Energy"].append(energy)
+            daily_nutrients["Cho"].append(cho)
+            daily_nutrients["Protein"].append(protein)
+            daily_nutrients["Fat"].append(fat)
 
-    df_nutrients = pd.DataFrame(daily_nutrients)
+        df_nutrients = pd.DataFrame(daily_nutrients)
 
-    kcal_min, kcal_max = conf.NUTRIENT_BOUNDS["kcal"]
-    cho_min, cho_max = conf.NUTRIENT_BOUNDS["cho"]
-    protein_min, protein_max = conf.NUTRIENT_BOUNDS["protein"]
-    fat_min, fat_max = conf.NUTRIENT_BOUNDS["fat"]
+        kcal_min, kcal_max = conf.NUTRIENT_BOUNDS["kcal"]
+        cho_min, cho_max = conf.NUTRIENT_BOUNDS["cho"]
+        protein_min, protein_max = conf.NUTRIENT_BOUNDS["protein"]
+        fat_min, fat_max = conf.NUTRIENT_BOUNDS["fat"]
 
-    fig, axes = plt.subplots(4, 1, figsize=(8, 12))
-    nutrient_info = [
-        ("Energy", kcal_min, kcal_max, "energy(kcal)"),
-        ("Cho", cho_min, cho_max, "cho(g)"),
-        ("Protein", protein_min, protein_max, "protein(g)"),
-        ("Fat", fat_min, fat_max, "fat(g)")
-    ]
+        fig, axes = plt.subplots(4, 1, figsize=(8, 12))
+        nutrient_info = [
+            ("Energy", kcal_min, kcal_max, "energy(kcal)"),
+            ("Cho", cho_min, cho_max, "cho(g)"),
+            ("Protein", protein_min, protein_max, "protein(g)"),
+            ("Fat", fat_min, fat_max, "fat(g)")
+        ]
 
-    for ax, (key, min_val, max_val, title) in zip(axes, nutrient_info):
-        ax.bar(df_nutrients["Day"], df_nutrients[key], color="skyblue")
-        ax.axhline(max_val, color='red', linestyle='--', label='MAX')
-        ax.axhline(min_val, color='blue', linestyle='--', label='MIN')
-        ax.set_title(title)
-        ax.set_ylabel("AMOUNT")
-        ax.legend()
+        for ax, (key, min_val, max_val, title) in zip(axes, nutrient_info):
+            ax.bar(df_nutrients["Day"], df_nutrients[key], color="skyblue")
+            ax.axhline(max_val, color='red', linestyle='--', label='MAX')
+            ax.axhline(min_val, color='blue', linestyle='--', label='MIN')
+            ax.set_title(title)
+            ax.set_ylabel("AMOUNT")
+            ax.legend()
 
-    plt.tight_layout()
-    st.pyplot(fig)
+        plt.tight_layout()
+        st.pyplot(fig)
