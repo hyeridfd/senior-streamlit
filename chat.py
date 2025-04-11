@@ -12,10 +12,6 @@ from pymoo_runner import run_optimization_from_streamlit
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 푸드 솔루션", page_icon="🧓")
 
-import streamlit as st
-
-st.set_page_config(page_title="시니어 맞춤형 푸드 솔루션", page_icon="🧓")
-
 st.write("✅ 앱 진입 시작됨")
 
 # 비동기적 설정 부분을 try-except로 감싸서 에러가 어디서 나는지 확인
