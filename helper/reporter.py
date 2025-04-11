@@ -379,6 +379,7 @@ class Reporter:
                     #print(f"[DEBUG] → solution 등록 완료 (type: {type(val)}, fitness: {ind.F[0]:.4f})")
 
                 else:
+                    pass
                     #print(f"[DEBUG] → 등록 실패: val type = {type(val)}, val = {val}")
                             # ✅ 등록 실패한 경우
                 
