@@ -12,31 +12,6 @@ from pymoo_runner import run_optimization_from_streamlit
 # 초기 설정
 st.set_page_config(page_title="시니어 맞춤형 푸드 솔루션", page_icon="🧓")
 
-st.write("✅ 앱 진입 시작됨")
-
-# 비동기적 설정 부분을 try-except로 감싸서 에러가 어디서 나는지 확인
-try:
-    openai_api_key = st.secrets["OPENAI_API_KEY"]
-    pinecone_api_key = st.secrets["PINECONE_API_KEY"]
-    st.write("✅ Secrets 로딩 성공")
-except Exception as e:
-    st.error("❌ Secrets 설정 오류")
-    st.text(f"에러 내용: {e}")
-    st.stop()
-
-# 여기에 import 관련도 추가하여 어느 부분에서 멈추는지 확인
-try:
-    from pymoo_runner import run_optimization_from_streamlit
-    from helper.config import Config
-    st.write("✅ Import 성공")
-except Exception as e:
-    st.error("❌ Import 오류")
-    st.text(f"에러 내용: {e}")
-    st.stop()
-
-# 계속 실행
-st.write("✅ 앱 정상 실행 중")
-
 st.image("./logo.png", width=150)
 
 st.markdown(
