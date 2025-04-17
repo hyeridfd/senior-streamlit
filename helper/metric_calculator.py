@@ -13,7 +13,7 @@ from helper.config import Config
 class MetricCalculator:
     def __init__(self):
         conf = Config()
-        self.ref_point = np.array([1.2] * conf.FITNESS_FUNCTIONS.__len__())
+        self.ref_point = np.array([1.1] * conf.FITNESS_FUNCTIONS.__len__())
         #파레토: 각 fitness function의 최솟값을 0으로 간주하고, 그에 대한 거리를 측정함
         self.pareto_front = np.array([0] * conf.FITNESS_FUNCTIONS.__len__())
 
